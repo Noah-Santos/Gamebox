@@ -30,17 +30,20 @@ const createPlayers = async(req,res)=>{
 const updatePlayers = async(req,res)=>{
     try {
         let {playerID} = req.params;
-        let {name, age} = req.body;
-        let changePerson = Players.findById(playerID);
+        let {name, age, board} = req.body;
+        let changePlayer = Players.findById(playerID);
 
         if(!name){
-            name = changePerson.name;
+            name = changePlayer.name;
         }
         if(!age){
-            age = changePerson.age;
+            age = changePlayer.age;
+        }
+        if(!board){
+            board = changePlayer.board;
         }
 
-        let players = await Players.findOneAndUpdate({playerID:playerID}, {name:name, age:age});
+        let players = await Players.findOneAndUpdate({playerID:playerID}, {name:name, age:age, board:board});
         res.json(players);
     } catch (error) {
         console.log(error);

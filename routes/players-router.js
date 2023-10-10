@@ -3,11 +3,11 @@ const router = express.Router();
 
 // Below here is to work with the router application
 
-let People = require('../models/player');
+let Players = require('../models/player');
 
 router.get('/', async(req,res)=>{
     try {
-        let players = await People.find({});
+        let players = await Players.find({});
         res.json(players);
     } catch (error) {
         console.log(error)
@@ -16,12 +16,12 @@ router.get('/', async(req,res)=>{
 
 router.post('/', async(req,res)=>{
     try {
-        let allPeople = await People.find({});
+        let allPlayers = await Players.find({});
         const {name, age} = req.body;
 
-        let newPerson = await People.create({name:name, age:age, playerID:allPeople.length+1});
-        allPeople = await People.find({});
-        res.json(allPeople);
+        let newPerson = await Players.create({name:name, age:age, playerID:allPlayers.length+1});
+        allPlayers = await Players.find({});
+        res.json(allPlayers);
 
     } catch (error) {
         console.log(error);
@@ -32,18 +32,20 @@ router.post('/', async(req,res)=>{
 router.put('/:playerID', async(req,res)=>{
     try {
         let {playerID} = req.params;
-        let {name, age} = req.body;
-        let changePeople = People.findById(playerID)
+        let {name, age, board} = req.body;
+        let changePlayer = Players.findById(playerID);
 
         if(!name){
-            name = changePeople.name;
+            name = changePlayer.name;
         }
         if(!age){
-            age = changePeople.age;
+            age = changePlayer.age;
+        }
+        if(!board){
+            board = changePlayer.board;
         }
 
-        let players = await People.findOneAndUpdate({playerID:playerID}, {name:name, age:age});
-        res.json(players);
+        let players = await Players.findOneAndUpdate({playerID:playerID}, {name:name, age:age, board:board});
     } catch (error) {
         console.log(error);
     }
@@ -53,7 +55,7 @@ router.put('/:playerID', async(req,res)=>{
 router.delete('/:playerID', async(req, res)=>{
     try {
         const {playerID} = req.params;
-        let player = await People.findOneAndDelete({playerID:playerID});
+        let player = await Players.findOneAndDelete({playerID:playerID});
         res.json(player);
     } catch (error) {
         console.log(error);
