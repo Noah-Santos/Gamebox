@@ -17,6 +17,10 @@ const PlayerSchema = new mongoose.Schema({
     wins:{
         type: Number,
         default: 0
+    },
+    board:{
+        type: String,
+        default: "[['x','x','x'],['x','x','x'],['x','x','x']]"
     }
 },{collection: 'Players'})
 
