@@ -1,0 +1,10 @@
+Game: 9-hole
+Players: 2 players
+Winner: player with lowest score at end of game
+
+Deck:
+    -When player clicks the deck, the card will follow their cursor until they click a card on their grid or the discard pile
+
+Ideas:
+    -Add a bright outline to whatever they are hovering over
+    -User can select a background of their choosing

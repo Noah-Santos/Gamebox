@@ -1,24 +1,23 @@
 const mongoose = require('mongoose');
 
-const PersonSchema = new mongoose.Schema({
+const PlayerSchema = new mongoose.Schema({
     name:{
         type: String,
         required: [true, 'Must provide a name'],
         trim: true,
     },
-    task:{
-        type: String,
-        trim: true,
-        default: 'none'
-    },
     age:{
         type: Number,
         default: 10
     },
-    userID:{
+    playerID:{
+        type: Number,
+        default: 0
+    },
+    wins:{
         type: Number,
         default: 0
     }
-},{collection: 'People'})
+},{collection: 'Players'})
 
-module.exports = mongoose.model('Person', PersonSchema);
+module.exports = mongoose.model('Player', PlayerSchema);
