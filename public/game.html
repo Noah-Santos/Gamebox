@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>9 Hole Game</title>
 </head>
 <body>
     <div class="board">
         <!-- Player 1 -->
         <div class="playerBoard">
             <div class="row">
-                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card">
+                <img src="https://www.deckofcardsapi.com/static/img/back.png" onclick="test()"class="card">
                 <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card">
                 <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card">
             </div>
@@ -31,7 +31,7 @@
         <div class="centerCard">
             <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card">
             <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card">
-            <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card">
+            <!-- <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card"> -->
         </div>
 
         <!-- Player 2 -->
@@ -53,6 +53,12 @@
             </div>
         </div>
     </div>
+
+    <div class="btnDiv">
+        <button class="mainBTN" onclick="btnChange()"><strong id="mainBTN">Start Game</strong></button>
+    </div>
+
     <script src="./taskFile.js"></script>
+    <script src="./basic.js"></script>
 </body>
 </html>
