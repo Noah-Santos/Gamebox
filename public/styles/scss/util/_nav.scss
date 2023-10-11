@@ -33,6 +33,7 @@ body {
             justify-content: space-evenly;
             align-items: center;
             margin-top: 5rem;
+            height: 60%;
 
             // close button for the nav
             .x {
@@ -66,11 +67,6 @@ body {
                         top: 1vh;
                         bottom: 1vh;
                     }
-                }
-
-                // adds underline if links is active
-                .activeLink {
-                    border-bottom: 5px solid white;
                 }
             }
         }
