@@ -5,6 +5,10 @@
     z-index: 1;
 }
 
+h1{
+    padding: 10px;
+}
+
 body{
     width: 100%;
     background-repeat: no-repeat;
@@ -92,10 +96,15 @@ body{
 
 .menu{
     display: none;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     width: 100vw;
-    background-color: rgb(53, 53, 53);
     position: absolute;
-    transform: translate(0px, -50vh);
+    transform: translate(0px, -60vh);
     z-index: 3000;
+}
+
+.innerMenu{
+    text-align: center;
+    background-color: rgb(110, 110, 110);
 }
