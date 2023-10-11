@@ -95,7 +95,7 @@ body .btnDiv .mainBTN {
   height: auto;
   font-size: 180px;
   border-radius: 10px;
-  background-color: lightcoral;
+  background-color: rgb(191, 115, 0);
   z-index: 2000;
   /* transform: translate(0px, -300px); */
   transition: all 0.5s;
@@ -139,6 +139,7 @@ body nav .navContent .x {
   display: none;
 }
 body nav .navContent .containerLink {
+  width: -moz-fit-content;
   width: fit-content;
 }
 body nav .navContent .containerLink .navLink {
@@ -155,5 +156,6 @@ body nav .navContent .containerLink .navLink {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  overflow-y: hidden;
   z-index: 1;
 }/*# sourceMappingURL=main.css.map */
