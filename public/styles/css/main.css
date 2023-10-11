@@ -31,9 +31,10 @@ body {
 }
 
 body {
-  background-image: url("../../images/fancyDark.jpg");
+  width: 100%;
   background-repeat: no-repeat;
   background-size: cover;
+  background-image: radial-gradient(rgb(0, 189, 0), rgb(0, 156, 0), rgb(0, 99, 0));
 }
 body #pickedCard {
   width: 10.7vw;
@@ -50,6 +51,7 @@ body .board {
   align-items: center;
   width: 100%;
   height: 100vh;
+  transition: all 0.5s;
 }
 body .board .centerCard {
   display: flex;
@@ -81,11 +83,54 @@ body .btnDiv {
   align-items: center;
   justify-content: center;
   width: 100vw;
+  z-index: 2000;
+  transform: translate(0px, -62.4vh);
+  position: absolute;
+  transition: all 0.5s;
 }
 body .btnDiv .mainBTN {
-  width: 15vw;
+  width: 80vw;
   height: auto;
-  font-size: x-large;
+  font-size: 180px;
   border-radius: 10px;
-  background-color: red;
+  background-color: lightcoral;
+  z-index: 2000;
+  /* transform: translate(0px, -300px); */
+  transition: all 0.5s;
+}
+body .nav {
+  display: flex;
+  justify-content: flex-start;
+  width: 100vw;
+  z-index: 3000;
+  position: absolute;
+  transform: translate(0px, -100vh);
+  background: none;
+  border: none;
+}
+body .nav .navText {
+  font-size: 60px;
+  margin-left: 1.25vw;
+  z-index: 3000;
+  background: none;
+  border: none;
+}
+body .menu {
+  display: none;
+  justify-content: center;
+  width: 100vw;
+  background-color: rgb(53, 53, 53);
+  position: absolute;
+  transform: translate(0px, -50vh);
+  z-index: 3000;
+}
+body .menu h1 {
+  padding: 10px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  z-index: 1;
 }/*# sourceMappingURL=main.css.map */

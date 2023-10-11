@@ -1,8 +1,9 @@
 // sets the background image
 body {
-    background-image: url('../../images/fancyDark.jpg');
+    width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
+    background-image: radial-gradient(rgb(0, 189, 0), rgb(0, 156, 0), rgb(0, 99, 0));
 
     // edits the card that was selected
     #pickedCard{
@@ -22,6 +23,7 @@ body {
         align-items: center;
         width: 100%;
         height: 100vh;
+        transition: all .5s;
 
         // holds the deck and discard pile
         .centerCard {
@@ -65,14 +67,57 @@ body {
         align-items: center;
         justify-content: center;
         width: 100vw;
+        z-index: 2000;
+        transform: translate(0px, -62.4vh);
+        position: absolute;
+        transition: all 0.5s;
 
         // styles the next turn button
         .mainBTN {
-            width: 15vw;
+            width: 80vw;
             height: auto;
-            font-size: x-large;
+            font-size: 180px;
             border-radius: 10px;
-            background-color: red;
+            background-color: lightcoral;
+            z-index: 2000;
+            /* transform: translate(0px, -300px); */
+            transition: all 0.5s;
+        }
+    }
+
+    // edits the nav button
+    .nav {
+        display: flex;
+        justify-content: flex-start;
+        width: 100vw;
+        z-index: 3000;
+        position: absolute;
+        transform: translate(0px, -100vh);
+        background: none;
+        border: none;
+
+        // edits text in the nav
+        .navText {
+            font-size: 60px;
+            margin-left: 1.25vw;
+            z-index: 3000;
+            background: none;
+            border: none;
+        }
+    }
+
+    // edits the menu pop up
+    .menu {
+        display: none;
+        justify-content: center;
+        width: 100vw;
+        background-color: rgb(53, 53, 53);
+        position: absolute;
+        transform: translate(0px, -50vh);
+        z-index: 3000;
+
+        h1 {
+            padding: 10px;
         }
     }
 }

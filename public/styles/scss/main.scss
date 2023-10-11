@@ -1,1 +1,8 @@
 @import "./util/reset", "./util/variables", "./util/reset", "./util/mixins", "./util/game";
+
+* {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    z-index: 1;
+}

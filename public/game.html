@@ -8,60 +8,74 @@
 </head>
 <body>
     <img src="https://www.deckofcardsapi.com/static/img/back.png" id="pickedCard">
-    <div class="board">
+    <main class="board" id="boards">
         <!-- Player 1 -->
-        <div class="playerBoard">
+        <section class="playerBoard">
             <div class="row">
-                <img src="https://www.deckofcardsapi.com/static/img/back.png" onclick="test()"class="card">
-                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card">
-                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card">
+                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card" id="card1.1">
+                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card" id="card1.2">
+                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card" id="card1.3">
             </div>
             <div class="row">
-                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card">
-                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card">
-                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card">
+                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card" id="card1.4">
+                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card" id="card1.5">
+                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card" id="card1.6">
             </div>
             <div class="row">
-                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card">
-                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card">
-                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card">
+                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card" id="card1.7">
+                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card" id="card1.8">
+                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card" id="card1.9">
             </div>
-        </div>
+        </section>
 
         <!-- Center card -->
-        <div class="centerCard">
+        <section class="centerCard">
             <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card" id="deck">
             <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card" id="discardPile">
             <!-- <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card"> -->
-        </div>
+        </section>
 
         <!-- Player 2 -->
-        <div class="playerBoard">
+        <section class="playerBoard">
             <div class="row">
-                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card">
-                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card">
-                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card">
+                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card" id="card2.1">
+                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card" id="card2.2">
+                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card" id="card2.3">
             </div>
             <div class="row">
-                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card">
-                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card">
-                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card">
+                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card" id="card2.4">
+                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card" id="card2.5">
+                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card" id="card2.6">
             </div>
             <div class="row">
-                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card">
-                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card">
-                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card">
+                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card" id="card2.7">
+                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card" id="card2.8">
+                <img src="https://www.deckofcardsapi.com/static/img/back.png" class="card" id="card2.9">
             </div>
+        </section>
+    </main>
+
+    <section class="btnDiv" id="btnDiv2">
+        <button class="mainBTN" id="btnDiv" onclick="btnChange()"><strong id="mainBTN">Start Game</strong></button>
+    </section>
+
+    <!-- Header -->
+    <nav class="nav">
+        <button class="navText"  onclick="headerClick()">&#9776;</button>
+    </nav>
+
+    <!-- Menu -->
+    <section class="menu" id="menu">
+        <div class="innerMenu">
+            <h1>Menu</h1>
+            <h1>Restart Game</h1>
+            <h1>Retun To Login</h1>
         </div>
-    </div>
+    </section>
 
-    <div class="btnDiv">
-        <button class="mainBTN" onclick="btnChange()"><strong id="mainBTN">Start Game</strong></button>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="crossorigin="anonymous"></script>
-    <script src="card.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <!-- <script src="./taskFile.js"></script> -->
-    <script src="./basic.js"></script>
+    <script src="./card.js"></script>
+    <!-- <script src="./basic.js"></script> -->
 </body>
 </html>
