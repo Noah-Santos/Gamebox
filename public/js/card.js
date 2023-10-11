@@ -1,4 +1,15 @@
 $(function(){
+    // blurs the screen until the start button is clicked
+    // also makes sure that the nav doesn't unblur everything until game starts
+    let started = false;
+    $('section').css("filter", "blur(4px)");
+    $('.btnDiv').css("filter", "blur(0px)")
+    $('#btnDiv').on('click', function(){
+        $('section').css("filter", "blur(0px)");   
+        started = true; 
+    })
+
+
     let picked = false;
 
     // makes the card follow the mouse at all times
@@ -45,21 +56,28 @@ $(function(){
 
     // jquery for the nav
     
-     // when burger is clicked, open nav
-    $("#burger").click(function(){
+    // when burger is clicked, open nav
+    $("#burger").on('click', function(){
         $(".nav").animate({width: "28%"}, 300).delay(50).promise().done(function(){
             $(".x").css("display", "block");
             $(".navLink").css("display", "flex");
         });
         $("section").css("filter", "blur(4px)");
+        $("#pickedCard").css("filter", "blur(4px)");
     });
 
     // when x is clicked, close nav
-    $(".x").click(function(){
+    $(".x").on('click', function(){
         $(".x").css("display", "none");
         $(".navLink").css("display", "none");
         $(".nav").animate({width: "0%"}, 300);
-        $("section").css("filter", "blur(0px)");
+        
+        // prevents everything from unblurring until the game starts
+        if(started){
+            $("section").css("filter", "blur(0px)");
+            $("#pickedCard").css("filter", "blur(0px)");
+        }
+        $('.btnDiv').css("filter", "blur(0px)")
     });  
 })
 
