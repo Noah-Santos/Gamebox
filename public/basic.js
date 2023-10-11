@@ -22,3 +22,15 @@ function btnChange(){
         document.getElementById("abc123").style.transform = "translate(0vw,0px)";
     }
 }
+
+// dipslays the menu
+let menu = false;
+function headerClick(){
+    if (menu == false){
+        menu = true;
+        document.getElementById("menu").style.display = "flex";
+    } else if (menu == true){
+        menu = false;
+        document.getElementById("menu").style.display = "none";
+    }
+}
