@@ -1,4 +1,5 @@
 // https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1
+// import axios from "axios";
 
 let Player = require('./models/player');
 const express = require('express');
@@ -7,20 +8,10 @@ const morgan = require('morgan');
 require('dotenv').config();
 const connectDB = require('./db/connect');
 
-async function getCards(){
-    let cards = await fetch('https://www.deckofcardsapi.com/api/deck/new/')
-    .then(response => {
-        response.json()
-        console.log(response)
-    })
-    console.log(cards);
-    // cards.map(card=>{
-    //     console.log(card);
-    // })
-
-
-    
+async function getDeck(){
+    // let {deck_id} = await fetch('https://www.deckofcardsapi.com/api/deck/new/');
+    let deck = await fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1').then(response =>{return response.json()});
+    console.log(deck);
 }
-
-let cards = getCards();
-console.log(cards);
+getDeck();
+// console.log(cards);
