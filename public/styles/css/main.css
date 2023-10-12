@@ -113,12 +113,14 @@ body .burger {
 }
 body nav {
   height: 100%;
-  width: 0%;
+  width: 28%;
   position: absolute;
   top: 0rem;
   left: 0rem;
   z-index: 10;
+  transform: translateX(-100%);
   background-color: #1e1e1e;
+  transition: all 0.5s;
 }
 body nav .navContent {
   display: flex;
@@ -139,7 +141,6 @@ body nav .navContent .x {
   display: none;
 }
 body nav .navContent .containerLink {
-  width: -moz-fit-content;
   width: fit-content;
 }
 body nav .navContent .containerLink .navLink {

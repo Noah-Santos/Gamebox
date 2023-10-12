@@ -58,7 +58,9 @@ $(function(){
     
     // when burger is clicked, open nav
     $("#burger").on('click', function(){
-        $(".nav").animate({width: "28%"}, 300).delay(50).promise().done(function(){
+        console.log('click')
+        document.getElementById("nav").style.transform = "translateX(0%)"
+        $(".nav").delay(50).promise().done(function(){
             $(".x").css("display", "block");
             $(".navLink").css("display", "flex");
         });
@@ -70,7 +72,7 @@ $(function(){
     $(".x").on('click', function(){
         $(".x").css("display", "none");
         $(".navLink").css("display", "none");
-        $(".nav").animate({width: "0%"}, 300);
+         document.getElementById("nav").style.transform = "translateX(-100%)"
         
         // prevents everything from unblurring until the game starts
         if(started){
