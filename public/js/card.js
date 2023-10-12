@@ -22,6 +22,7 @@ $(function(){
 
         // displays the card
         $('#pickedCard').css('display', 'block');
+        $("#pickedCard").css("filter", "blur(0px)");
     })
 
     function card(e){
