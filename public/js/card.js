@@ -1,30 +1,40 @@
 $(function(){
+    // if(sessionStorage.getItem('turn') != 0){
+    //     $('#btnDiv').css('display', 'none');
+    //     $('#boards').css('width', '150%');
+    // }else{
+    //     $('#btnDiv').css('display','flex');
+    // }
+    $('#btnDiv').css('display','flex');
+    
+
     // blurs the screen until the start button is clicked
     // also makes sure that the nav doesn't unblur everything until game starts
     let started = false;
     $('section').css("filter", "blur(4px)");
-    $('.btnDiv').css("filter", "blur(0px)")
+    $('#btnDiv').css("filter", "blur(0px)");
     $('#btnDiv').on('click', function(){
-        $('section').css("filter", "blur(0px)");   
+        $('section').css("filter", "blur(0px)"); 
         started = true; 
-    })
-
+    })  
 
     let picked = false;
 
     // makes the card follow the mouse at all times
     document.addEventListener("mousemove", card);
-
     $('#deck').on('click', function(e){
-        // sets variable to true, indicating that a card is selected
-        picked = true;
-        console.log(picked)
+        if(started){
+            // sets variable to true, indicating that a card is selected
+            picked = true;
+            console.log(picked)
 
-        // displays the card
-        $('#pickedCard').css('display', 'block');
-        $("#pickedCard").css("filter", "blur(0px)");
+            // displays the card
+            $('#pickedCard').css('display', 'block');
+            $("#pickedCard").css("filter", "blur(0px)");
+        } 
     })
-
+    
+    
     function card(e){
         // sets position to the client x and y positon
         $('#pickedCard').css({
@@ -51,10 +61,6 @@ $(function(){
     }
 
 
-
-
-
-
     // jquery for the nav
     
     // when burger is clicked, open nav
@@ -63,7 +69,7 @@ $(function(){
         document.getElementById("nav").style.transform = "translateX(0%)"
         $(".nav").delay(50).promise().done(function(){
             $(".x").css("display", "block");
-            $(".navLink").css("display", "flex");
+            // $(".navLink").css("display", "flex");
         });
         $("section").css("filter", "blur(4px)");
         $("#pickedCard").css("filter", "blur(4px)");
@@ -72,7 +78,7 @@ $(function(){
     // when x is clicked, close nav
     $(".x").on('click', function(){
         $(".x").css("display", "none");
-        $(".navLink").css("display", "none");
+        // $(".navLink").css("display", "none");
          document.getElementById("nav").style.transform = "translateX(-100%)"
         
         // prevents everything from unblurring until the game starts
@@ -80,34 +86,13 @@ $(function(){
             $("section").css("filter", "blur(0px)");
             $("#pickedCard").css("filter", "blur(0px)");
         }
-        $('.btnDiv').css("filter", "blur(0px)")
+        $('#btnDiv').css("filter", "blur(0px)")
     });  
 })
 
 // Declares each set cards
 let cards1 = ["card1.1", "card1.2", "card1.3", "card1.4", "card1.5", "card1.6", "card1.7", "card1.8", "card1.9"];
 let cards2 = ["card2.1", "card2.2", "card2.3", "card2.4", "card2.5", "card2.6", "card2.7", "card2.8", "card2.9"];
-
-// onclick for the main start button
-let playerTurn = 0;
-function btnChange(){
-    if(playerTurn === 0){
-        document.getElementById("btnDiv").style.width = "20vw";
-        document.getElementById("btnDiv").style.fontSize = "20px";
-        document.getElementById("btnDiv2").style.transform = "translate(0px, -5vh)";
-        document.getElementById("mainBTN").innerHTML = "Player 1's Turn";
-        document.getElementById("boards").style.width = "150%";
-        playerTurn = 1;
-    } else if(playerTurn === 1){
-        document.getElementById("mainBTN").innerHTML = "Player 2's Turn";
-        playerTurn = 2;
-        document.getElementById("boards").style.transform = "translate(-50vw,0px)";
-    } else if (playerTurn === 2){
-        document.getElementById("mainBTN").innerHTML = "Player 1's Turn";
-        playerTurn = 1;
-        document.getElementById("boards").style.transform = "translate(0vw,0px)";
-    }
-}
 
 // dipslays the menu
 let menu = false;

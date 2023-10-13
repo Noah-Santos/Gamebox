@@ -80,7 +80,7 @@ body .board .playerBoard .row .card {
   height: auto;
   z-index: 5;
 }
-body .btnDiv {
+body #btnDiv {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -90,7 +90,7 @@ body .btnDiv {
   transform: translate(0px, -62.4vh);
   transition: all 0.5s;
 }
-body .btnDiv .mainBTN {
+body #btnDiv .mainBTN {
   width: 80vw;
   height: auto;
   font-size: 180px;
@@ -148,7 +148,6 @@ body nav .navContent .containerLink .navLink {
   justify-content: center;
   color: white;
   font-size: 3.5vw;
-  display: none;
   padding-top: 1vh;
   padding-bottom: 1vh;
 }
