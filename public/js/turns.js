@@ -4,6 +4,7 @@ $(function(){
     let picked = false;
     let moves = 0;
     let firstTurns = false;
+    let firstMove = false;
     let turns;
 
     // makes sure that the game has started
@@ -12,9 +13,24 @@ $(function(){
         turns = 1;
     })
 
+
+
+
+    // MAKE ARRAY TO HOLD WICH CARDS ARE CLICKED ON FIRST TURN AND LOOP THROUGH TO PREVENT THEM FROM CHANGING ON FIRST GO
+
+
+
+
+
+
+    // keeps track of which cards have been clicked already
+    let chosenCards = [];
     // keeps track of turn every click
     $('.playArea').on('click', async function(){
         if(started){
+            console.log(chosenCards);
+            console.log($(this).attr('id'))
+            
             // $(this).css('display', 'none');
             let draw = await fetch(`https://www.deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`).then(response =>{return response.json()});
             // console.log(`it is turn ${turns}`)
@@ -23,8 +39,20 @@ $(function(){
             // console.log(draw.cards.image)
             // if it is the first turn, let player flip three cards
             if(turns == 1 && sessionStorage.getItem('start')){
-                moves++;
-                $(this).attr('src', draw.cards[0].image).css('pointer-events', 'none');
+                let inArr = false;
+                for(let i = 0; i < chosenCards.length; i++){
+                    if($(this).attr('id') == chosenCards[i]){
+                        inArr = true;
+                    }
+                }
+                if(!inArr){
+                    console.log('passed1')
+                    moves++;
+                    $(this).attr('src', draw.cards[0].image).animate({opacity:1}, 100);
+                    chosenCards.push($(this).attr('id'));
+                }
+                
+
                 if(moves == 3){
                     moves = 0;
                     turns++;
@@ -44,43 +72,61 @@ $(function(){
                 turns++;
                 
                 // set image to the drawn card and hides drawn card
-                $(this).attr('src', $('#pickedCard').attr('src')).css('pointer-events', 'none');
+                $(this).attr('src', $('#pickedCard').attr('src')).animate({opacity:1}, 100);
                 $('#pickedCard').css('display', 'none');
 
                 // slides screen over to player 2
                 setTimeout(function(){
                     document.getElementById("boards").style.transform = "translate(-50vw,0px)";
                 }, 500);
+                picked = false;
+                firstMove = false;
 
             // if it is the second turn, let player flip three cards
             }else if(turns == 2 && sessionStorage.getItem('start')){
-                $('#deck').css('pointer-events', 'auto');
-                moves++;
-                $(this).attr('src', draw.cards[0].image).css('pointer-events', 'none');
+                let inArr = false;
+                for(let i = 0; i < chosenCards.length; i++){
+                    if($(this).attr('id') == chosenCards[i]){
+                        inArr = true;
+                    }
+                }
+                if(!inArr){
+                    console.log('passed1')
+                    moves++;
+                    $(this).attr('src', draw.cards[0].image).animate({opacity:1}, 100);
+                    chosenCards.push($(this).attr('id'));
+                }
+                
+
                 if(moves == 3){
                     moves = 0;
                     turns++;
-                    firstTurns = true;
 
                     // slides screen over to player 1
                     setTimeout(function(){
-                        document.getElementById("boards").style.transform = "translate(0vw,0px)";
+                        document.getElementById("boards").style.transform = "translate(00vw,0px)";
                     }, 500);
+                    firstTurns = true;
+                    
+                    // console.log(turns);
                 }
 
             // makes sure that a card is picked
             }else if(turns %2 == 0 && picked && sessionStorage.getItem('start')){
+                $('#deck').css('pointer-events', 'auto');
                 moves = 0;
                 turns++;
     
                 // set image to the drawn card and hides drawn card
-                $(this).attr('src', $('#pickedCard').attr('src')).css('pointer-events', 'none');
+                $(this).attr('src', $('#pickedCard').attr('src')).animate({opacity:1}, 100);
                 $('#pickedCard').css('display', 'none');
 
                 // slides screen over to player 1
                 setTimeout(function(){
                     document.getElementById("boards").style.transform = "translate(0vw,0px)";
                 }, 500);
+                picked = false;
+                firstMove = false;
             }
         }
     });
@@ -89,18 +135,39 @@ $(function(){
     // makes the card follow the mouse at all times
     document.addEventListener("mousemove", card);
     $('#deck').on('click', async function(e){
+        console.log('click')
         // makes sure the first opening moves are done first
-        if(firstTurns){
+        if(firstTurns && !firstMove){
+            console.log('work')
             // sets variable to true, indicating that a card is selected
             picked = true;
             // console.log(picked)
             // sets pciked card image to a drawn card image
             let draw = await fetch(`https://www.deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`).then(response =>{return response.json()});
             $('#pickedCard').attr('src', draw.cards[0].image);
-
+            console.log('draw')
             // displays the card
             $('#pickedCard').css({display: 'block', filter: 'blur(0px)'});
+            console.log('ayy')
+            // $('#deck').css('pointer-events', 'none');
+            firstMove = true;
+        }else if(firstMove){
             $('#deck').css('pointer-events', 'none');
+        }
+    })
+
+    $('#discardPile').on('click', async function(){
+        if(firstTurns && !firstMove && turns > 3){
+            // set the picled card to the card that is on top
+            $('#pickedCard').attr('src', $(this).attr('src'));
+            $(this).attr('src', 'https://www.deckofcardsapi.com/static/img/back.png');
+
+            // displays the card
+            // $('#pickedCard').css({display: 'block', filter: 'blur(0px)'});
+            $(this).css('pointer-events', 'none');
+            firstMove = true;
+        }else{
+            $('#deck').attr('src', $('#pickedCard').attr('src'));
         }
     })
     
