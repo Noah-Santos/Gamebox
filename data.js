@@ -19,7 +19,7 @@ async function getDeck(){
 
     // draw a card
     let draw = await fetch(`https://www.deckofcardsapi.com/api/deck/${deck_id}/draw/?count=1`).then(response =>{return response.json()});
-    // console.log(draw);
+    console.log(draw);
 
     // print value and suit of chosen card
     let value = draw.cards[0].value;

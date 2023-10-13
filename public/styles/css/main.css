@@ -148,6 +148,8 @@ body nav .navContent .containerLink .navLink {
   justify-content: center;
   color: white;
   font-size: 3.5vw;
+  background-color: transparent;
+  border: none;
   padding-top: 1vh;
   padding-bottom: 1vh;
 }
