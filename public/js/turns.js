@@ -6,6 +6,12 @@ $(function(){
     let firstTurns = false;
     let firstMove = false;
     let turns;
+    let playerOne  =[
+        [],[],[]
+    ]
+    let playerTwo  =[
+        [],[],[]
+    ]
 
     // makes sure that the game has started
     $('#btnDiv').on('click', function(){ 
