@@ -141,6 +141,7 @@ body nav .navContent .x {
   display: none;
 }
 body nav .navContent .containerLink {
+  width: -moz-fit-content;
   width: fit-content;
 }
 body nav .navContent .containerLink .navLink {
@@ -154,6 +155,98 @@ body nav .navContent .containerLink .navLink {
   padding-bottom: 1vh;
 }
 
+.loginTitle {
+  font-size: 15vh;
+  text-align: center;
+  margin: 20px;
+  color: white;
+  transform: translate(0px, 0vh);
+  animation: titleDrop 2s none;
+}
+
+@keyframes titleDrop {
+  from {
+    transform: translate(0px, -15vh);
+  }
+  to {
+    transform: translate(0px, 0vh);
+  }
+}
+.loginBlock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  width: 100vw;
+}
+.loginBlock .loginInfo {
+  animation: loginSlide 3s none linear;
+}
+.loginBlock input {
+  width: 25vw;
+  height: auto;
+  font-size: 50px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid black;
+  color: white;
+  text-align: center;
+  transform: translate(0, 0);
+  opacity: 1;
+}
+.loginBlock input:focus {
+  outline: 0;
+  border: 0;
+  border-bottom: 2px solid black;
+}
+.loginBlock input::-moz-placeholder {
+  color: white;
+}
+.loginBlock input::placeholder {
+  color: white;
+}
+.loginBlock button {
+  width: 25vw;
+  height: auto;
+  font-size: 50px;
+  background-color: blueviolet;
+  color: white;
+  border-radius: 12px;
+}
+
+@keyframes loginSlide {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.cardHolder {
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
+  height: auto;
+  transform: translate(0px, -110vh);
+  animation: cards 5s ease-in-out;
+  animation-delay: 0s;
+}
+.cardHolder .cardSets {
+  display: flex;
+  flex-direction: column;
+}
+.cardHolder .cardSets img {
+  width: 15vw;
+}
+
+@keyframes cards {
+  from {
+    transform: translate(0px, -300vh);
+  }
+  to {
+    transform: translate(0px, -110vh);
+  }
+}
 * {
   margin: 0;
   padding: 0;
