@@ -5,6 +5,7 @@ $(function(){
     let moves = 0;
     let firstTurns = false;
     let firstMove = false;
+    let discardClicked;
     let turns;
     let draw;
     let replace;
@@ -21,7 +22,7 @@ $(function(){
     let playerTwoImg =[
         ['x','x','x'],['x','x','x'],['x','x','x']
     ];
-    let discard = ['x','x'];
+    let discard = ['x','https://www.deckofcardsapi.com/static/img/back.png'];
     let cards1 = [["card1.1", "card1.2", "card1.3"], ["card1.4", "card1.5", "card1.6"], ["card1.7", "card1.8", "card1.9"]];
     let cards2 = [["card2.1", "card2.2", "card2.3"], ["card2.4", "card2.5", "card2.6"], ["card2.7", "card2.8", "card2.9"]];
 
@@ -45,6 +46,8 @@ $(function(){
     let chosenCards = [];
     // keeps track of turn every click
     $('.playArea').on('click', async function(){
+        console.log($(this).attr('src'))
+        replace = $(this).attr('src');
         $('#discardPile').css('pointer-events', 'auto');
         if(started){
             // console.log(chosenCards);
@@ -120,7 +123,6 @@ $(function(){
                 }, 500);
                 picked = false;
                 firstMove = false;
-                replace = $(this).attr('src');
 
             // if it is the second turn, let player flip three cards
             }else if(turns == 2 && sessionStorage.getItem('start')){
@@ -140,6 +142,7 @@ $(function(){
                         for(let j = 0; j < cards2[i].length; j++){
                             if($(this).attr('id') == cards2[i][j]){
                                 cardUpdate(i,j,2,false);
+                                discardClicked = false;
                             }
                         }
                     }
@@ -173,6 +176,7 @@ $(function(){
                     for(let j = 0; j < cards2[i].length; j++){
                         if($(this).attr('id') == cards2[i][j]){
                             cardUpdate(i,j,2, true);
+                            discardClicked = false;
                             // discardPileUpdate();
                         }
                     }
@@ -184,7 +188,6 @@ $(function(){
                 }, 500);
                 picked = false;
                 firstMove = false;
-                replace = $(this).attr('src');
             }
         }
     });
@@ -214,7 +217,11 @@ $(function(){
         }
     })
 
+    if($('#discardPile').attr('src') == 'https://www.deckofcardsapi.com/static/img/back.png'){
+        
+    }
     $('#discardPile').on('click', async function(){
+        discardClicked = true;
         // console.log(firstMove)
         // lets player discard the card they drew and switch turns
         if(picked){
@@ -274,6 +281,7 @@ $(function(){
     
     // updates the grids of both players
     function cardUpdate(row, col, player, run){
+        console.log(replace)
         if(replace != 'https://www.deckofcardsapi.com/static/img/back.png'){
             if(player == 1){
                 discard[0] = playerOne[row][col];
@@ -283,6 +291,9 @@ $(function(){
                 discard[1] = playerTwoImg[row][col];
             }
         }
+        // if(!discardClicked){
+        //     discard[1] = 'https://www.deckofcardsapi.com/static/img/back.png';
+        // }
         if(player == 1){
             playerOne[row][col] = draw.cards[0].value;
             playerOneImg[row][col] = draw.cards[0].image;
@@ -300,13 +311,19 @@ $(function(){
 
     // updates the discard pile
     async function discardPileUpdate(){
-        if(replace == 'https://www.deckofcardsapi.com/static/img/back.png'){
+        if(replace == 'https://www.deckofcardsapi.com/static/img/back.png' || replace == undefined){
+            console.log('true');
             draw = await fetch(`https://www.deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`).then(response =>{return response.json()});
             discard[0] = draw.cards[0].value;
             discard[1] = draw.cards[0].image;
         }
         console.log(discard);
-        $('#discardPile').attr('src', discard[1]);
+        if(discard[1] == 'x'){
+            $('#discardPile').attr('src', 'https://www.deckofcardsapi.com/static/img/back.png');
+        }else{
+            $('#discardPile').attr('src', discard[1]);
+        }
+        
         firstMove = false;
     }
 
