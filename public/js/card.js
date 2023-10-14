@@ -49,8 +49,6 @@ $(function(){
 })
 
 // Declares each set cards
-let cards1 = ["card1.1", "card1.2", "card1.3", "card1.4", "card1.5", "card1.6", "card1.7", "card1.8", "card1.9"];
-let cards2 = ["card2.1", "card2.2", "card2.3", "card2.4", "card2.5", "card2.6", "card2.7", "card2.8", "card2.9"];
 
 // dipslays the menu
 let menu = false;
