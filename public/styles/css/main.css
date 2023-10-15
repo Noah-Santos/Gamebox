@@ -36,6 +36,14 @@ body {
   background-size: cover;
   background-image: radial-gradient(rgb(0, 189, 0), rgb(0, 156, 0), rgb(0, 99, 0));
 }
+body .winnerText {
+  position: absolute;
+  align-items: center;
+  width: 100vw;
+}
+body .winnerText h1 {
+  color: #1e1e1e;
+}
 body #pickedCard {
   width: 10.7vw;
   margin: 0.5vw;
@@ -95,7 +103,7 @@ body #btnDiv .mainBTN {
   height: auto;
   font-size: 180px;
   border-radius: 10px;
-  background-color: rgb(191, 115, 0);
+  background-color: #1e1e1e;
   z-index: 2000;
   /* transform: translate(0px, -300px); */
   transition: all 0.5s;
@@ -141,7 +149,6 @@ body nav .navContent .x {
   display: none;
 }
 body nav .navContent .containerLink {
-  width: -moz-fit-content;
   width: fit-content;
 }
 body nav .navContent .containerLink .navLink {
@@ -198,9 +205,6 @@ body nav .navContent .containerLink .navLink {
   outline: 0;
   border: 0;
   border-bottom: 2px solid black;
-}
-.loginBlock input::-moz-placeholder {
-  color: white;
 }
 .loginBlock input::placeholder {
   color: white;

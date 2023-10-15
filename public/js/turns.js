@@ -3,13 +3,14 @@ $(function(){
     let started = false;
     let picked = false;
     let moves = 0;
+    let finished = false;
     let firstTurns = false;
     let firstMove = false;
-    let discardClicked;
     let turns;
     let draw;
     let replace;
-    let oldInfo = [];
+    let playerOneScore = 0;
+    let playerTwoScore = 0;
     let playerOne =[
         ['x','x','x'],['x','x','x'],['x','x','x']
     ];
@@ -31,16 +32,6 @@ $(function(){
         started = true; 
         turns = 1;
     })
-
-
-
-
-    // MAKE ARRAY TO HOLD WICH CARDS ARE CLICKED ON FIRST TURN AND LOOP THROUGH TO PREVENT THEM FROM CHANGING ON FIRST GO
-
-
-
-
-
 
     // keeps track of which cards have been clicked already
     let chosenCards = [];
@@ -142,7 +133,6 @@ $(function(){
                         for(let j = 0; j < cards2[i].length; j++){
                             if($(this).attr('id') == cards2[i][j]){
                                 cardUpdate(i,j,2,false);
-                                discardClicked = false;
                             }
                         }
                     }
@@ -176,7 +166,6 @@ $(function(){
                     for(let j = 0; j < cards2[i].length; j++){
                         if($(this).attr('id') == cards2[i][j]){
                             cardUpdate(i,j,2, true);
-                            discardClicked = false;
                             // discardPileUpdate();
                         }
                     }
@@ -190,6 +179,16 @@ $(function(){
                 firstMove = false;
             }
         }
+        checkWinner();
+
+        if(finished){
+            // zooms board back to normal
+            setTimeout(function(){
+                document.getElementById("boards").style.transform = "translate(0vw,0px)";
+                document.getElementById("boards").style.width = "100%";
+            }, 1000);
+        }
+        
     });
 
     
@@ -221,7 +220,6 @@ $(function(){
         
     }
     $('#discardPile').on('click', async function(){
-        discardClicked = true;
         // console.log(firstMove)
         // lets player discard the card they drew and switch turns
         if(picked){
@@ -240,7 +238,7 @@ $(function(){
             }
             firstMove = false;
             picked = false;
-            $(this).css('opacity', '1')
+            $(this).animate({opacity:1}, 50);
 
         }else if(firstTurns && !firstMove && turns > 3){
             // console.log('yes');
@@ -281,6 +279,7 @@ $(function(){
     
     // updates the grids of both players
     function cardUpdate(row, col, player, run){
+        // if the card replaced is not blank, set the discard pile value to the value and image of the replaced card
         console.log(replace)
         if(replace != 'https://www.deckofcardsapi.com/static/img/back.png'){
             if(player == 1){
@@ -291,9 +290,8 @@ $(function(){
                 discard[1] = playerTwoImg[row][col];
             }
         }
-        // if(!discardClicked){
-        //     discard[1] = 'https://www.deckofcardsapi.com/static/img/back.png';
-        // }
+
+        // updates the players grid
         if(player == 1){
             playerOne[row][col] = draw.cards[0].value;
             playerOneImg[row][col] = draw.cards[0].image;
@@ -303,6 +301,7 @@ $(function(){
         }
         console.log(playerOne)
         console.log(playerTwo);
+
         // determines if the discard pile needs to be updated or not
         if(run){
             discardPileUpdate();
@@ -311,13 +310,15 @@ $(function(){
 
     // updates the discard pile
     async function discardPileUpdate(){
+        // if the card replaced has no value yet, draw new card to replace the discard pile
         if(replace == 'https://www.deckofcardsapi.com/static/img/back.png' || replace == undefined){
             console.log('true');
             draw = await fetch(`https://www.deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`).then(response =>{return response.json()});
             discard[0] = draw.cards[0].value;
             discard[1] = draw.cards[0].image;
         }
-        console.log(discard);
+        // console.log(discard);
+
         if(discard[1] == 'x'){
             $('#discardPile').attr('src', 'https://www.deckofcardsapi.com/static/img/back.png');
         }else{
@@ -333,6 +334,83 @@ $(function(){
             left:  e.pageX - 90,
             top:   e.pageY - 123
         });
+    }
+
+    // checks to see if the game is over
+    function checkWinner(){
+        let countOne = 0;
+        let countTwo = 0;
+        // checks if the either of the player grids are full or not
+        for(let i = 0; i < playerOne.length; i++){
+            for(let j = 0; j < playerOne[i].length; j++){
+                if(playerOne[i][j] != 'x'){
+                    countOne++;
+                }
+                if(playerTwo[i][j] != 'x'){
+                    countTwo++;
+                }
+            }
+        }
+        if(countOne == 9 || countTwo == 9){
+            console.log('Game over')
+            sumScore();
+            finished = true;
+        }
+    }
+
+    // sums the score of the boards
+    async function sumScore(){
+        // zooms board back to normal
+        // document.getElementById("boards").style.transform = "translate(0vw,0px)";
+        // document.getElementById("boards").style.width = "100%";
+        // prevents the game from continuing
+        $('#deck').css('pointer-events', 'none');
+        $('#discardPile').css('pointer-events', 'none');
+
+        for(let i = 0; i < cards1.length; i++){
+            for(let j = 0; j < cards1[i].length; j++){
+                draw = await fetch(`https://www.deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`).then(response =>{return response.json()});
+                // if the slot is empty, draw a card to fill the spot
+                if(playerOne[i][j] == 'x'){
+                    $(`#${cards1[i][j]}`).attr('src', draw.cards[0].image);
+                    playerOne[i][j] = draw.cards[0].value;
+                }
+                // sets the value for face cards and aces
+                if(playerOne[i][j] == 'JACK' || playerOne[i][j] == 'QUEEN' || playerOne[i][j] == 'KING'){
+                    playerOne[i][j] = 10;
+                }else if(playerOne[i][j] == 'ACE'){
+                    playerOne[i][j] = 1;
+                }
+                playerOneScore += Number(playerOne[i][j]);
+
+                // if the slot is empty, draw a card to fill the spot
+                if(playerTwo[i][j] == 'x'){
+                    console.log(draw.cards[0].image)
+                    console.log(cards2[i][j])
+                    console.log($(`#${cards2[i][j]}`))
+                    // document.findElementById(`${cards2[i][j]}`).src = `${draw.cards[0].image}`
+                    $(`#${cards2[i][j]}`).attr('src', `${draw.cards[0].image}`);
+                    console.log('success')
+                    playerTwo[i][j] = draw.cards[0].value;
+                }
+                // sets the value for face cards and aces
+                if(playerTwo[i][j] == 'JACK' || playerTwo[i][j] == 'QUEEN' || playerTwo[i][j] == 'KING'){
+                    playerTwo[i][j] = 10;
+                }else if(playerTwo[i][j] == 'ACE'){
+                    playerTwo[i][j] = 1;
+                }
+                playerTwoScore += Number(playerTwo[i][j]);
+            }
+        }
+        if(playerOneScore < playerTwoScore){
+            document.getElementById(`winner`).innerHTML = 'Player wins';
+        }else if(playerOneScore > playerTwoScore){
+            document.getElementById(`winner`).innerHTML = 'Guest wins';
+        }else{
+            document.getElementById(`winner`).innerHTML = 'Tie';
+        }
+        console.log(`Player one score: ${playerOneScore}`)
+        console.log(`Player two score: ${playerTwoScore}`)
     }
     
 })
