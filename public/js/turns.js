@@ -216,9 +216,9 @@ $(function(){
         }
     })
 
-    if($('#discardPile').attr('src') == 'https://www.deckofcardsapi.com/static/img/back.png'){
+    // if($('#discardPile').attr('src') == 'https://www.deckofcardsapi.com/static/img/back.png'){
         
-    }
+    // }
     $('#discardPile').on('click', async function(){
         // console.log(firstMove)
         // lets player discard the card they drew and switch turns
@@ -239,6 +239,8 @@ $(function(){
             firstMove = false;
             picked = false;
             $(this).animate({opacity:1}, 50);
+            discard[0] = draw.cards[0].value;
+            discard[1] = draw.cards[0].image;
 
         }else if(firstTurns && !firstMove && turns > 3){
             // console.log('yes');
@@ -248,6 +250,7 @@ $(function(){
             $(this).attr('src', 'https://www.deckofcardsapi.com/static/img/back.png');
             draw.cards[0].image = discard[1];
             draw.cards[0].value = discard[0];
+            console.log(draw.cards[0]);
 
             // displays the card
             // $('#pickedCard').css({display: 'block', filter: 'blur(0px)'});
@@ -360,48 +363,84 @@ $(function(){
 
     // sums the score of the boards
     async function sumScore(){
-        // zooms board back to normal
-        // document.getElementById("boards").style.transform = "translate(0vw,0px)";
-        // document.getElementById("boards").style.width = "100%";
         // prevents the game from continuing
         $('#deck').css('pointer-events', 'none');
         $('#discardPile').css('pointer-events', 'none');
 
-        for(let i = 0; i < cards1.length; i++){
-            for(let j = 0; j < cards1[i].length; j++){
-                draw = await fetch(`https://www.deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`).then(response =>{return response.json()});
-                // if the slot is empty, draw a card to fill the spot
-                if(playerOne[i][j] == 'x'){
-                    $(`#${cards1[i][j]}`).attr('src', draw.cards[0].image);
-                    playerOne[i][j] = draw.cards[0].value;
-                }
-                // sets the value for face cards and aces
-                if(playerOne[i][j] == 'JACK' || playerOne[i][j] == 'QUEEN' || playerOne[i][j] == 'KING'){
-                    playerOne[i][j] = 10;
-                }else if(playerOne[i][j] == 'ACE'){
-                    playerOne[i][j] = 1;
-                }
-                playerOneScore += Number(playerOne[i][j]);
+        // fills in any missing grid spots
+        for(let row = 0; row < cards1.length; row++){
+            for(let col = 0; col < cards1[row].length; col++){
+                // if spot is empty, fill it in with a drawn card
+                if(playerOne[row][col] == 'x'){
+                    draw = await fetch(`https://www.deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`).then(response =>{return response.json()});
+                    image = draw.cards[0].image;
+                    $(`#${cards1[row][col]}`).attr('src', image);
+                    playerOne[row][col] = draw.cards[0].value;
 
-                // if the slot is empty, draw a card to fill the spot
-                if(playerTwo[i][j] == 'x'){
-                    console.log(draw.cards[0].image)
-                    console.log(cards2[i][j])
-                    console.log($(`#${cards2[i][j]}`))
-                    // document.findElementById(`${cards2[i][j]}`).src = `${draw.cards[0].image}`
-                    $(`#${cards2[i][j]}`).attr('src', `${draw.cards[0].image}`);
-                    console.log('success')
-                    playerTwo[i][j] = draw.cards[0].value;
+                }else if(playerTwo[row][col] == 'x'){
+                    draw = await fetch(`https://www.deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`).then(response =>{return response.json()});
+                    image = draw.cards[0].image;
+                    $(`#${cards1[row][col]}`).attr('src', image);
+                    playerTwo[row][col] = draw.cards[0].value;
                 }
-                // sets the value for face cards and aces
-                if(playerTwo[i][j] == 'JACK' || playerTwo[i][j] == 'QUEEN' || playerTwo[i][j] == 'KING'){
-                    playerTwo[i][j] = 10;
-                }else if(playerTwo[i][j] == 'ACE'){
-                    playerTwo[i][j] = 1;
-                }
-                playerTwoScore += Number(playerTwo[i][j]);
             }
         }
+
+        // calls function to set values
+        setValues(playerOne);
+        setValues(playerTwo);
+
+        for(let i = 0; i < cards1.length; i++){
+            // determines if the row or column needs to be summed
+            if(playerOne[i][0] == playerOne[i][1] && playerOne[i][0] == playerOne[i][2]){
+                playerOneScore += rowSum();
+            }else{
+                playerOneScore += colSum();
+            }
+
+            if(playerTwo[i][0] == playerTwo[i][1] && playerTwo[i][0] == playerTwo[i][2]){
+                playerTwoScore += rowSum();
+            }else{
+                playerTwoScore += colSum();
+            }
+
+            // for(let j = 0; j < cards1[i].length; j++){
+            //     draw = await fetch(`https://www.deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`).then(response =>{return response.json()});
+            //     image = draw.cards[0].image;
+            //     // if the slot is empty, draw a card to fill the spot
+            //     if(playerOne[i][j] == 'x'){
+            //         $(`#${cards1[i][j]}`).attr('src', image);
+            //         playerOne[i][j] = draw.cards[0].value;
+            //     }
+            //     // sets the value for face cards and aces
+            //     // if(playerOne[i][j] == 'JACK' || playerOne[i][j] == 'QUEEN' || playerOne[i][j] == 'KING'){
+            //     //     playerOne[i][j] = 10;
+            //     // }else if(playerOne[i][j] == 'ACE'){
+            //     //     playerOne[i][j] = 1;
+            //     // }
+            //     playerOneScore += Number(playerOne[i][j]);
+
+            //     // if the slot is empty, draw a card to fill the spot
+            //     if(playerTwo[i][j] == 'x'){
+            //         console.log(draw.cards[0].image)
+            //         console.log(cards2[i][j])
+            //         console.log($(`#${cards2[i][j]}`))
+            //         // document.findElementById(`${cards2[i][j]}`).src = `${draw.cards[0].image}`
+            //         $(`#${cards2[i][j]}`).attr('src', image);
+            //         console.log('success')
+            //         playerTwo[i][j] = draw.cards[0].value;
+            //     }
+            //     // sets the value for face cards and aces
+            //     // if(playerTwo[i][j] == 'JACK' || playerTwo[i][j] == 'QUEEN' || playerTwo[i][j] == 'KING'){
+            //     //     playerTwo[i][j] = 10;
+            //     // }else if(playerTwo[i][j] == 'ACE'){
+            //     //     playerTwo[i][j] = 1;
+            //     // }
+            //     playerTwoScore += Number(playerTwo[i][j]);
+            // }
+        }
+
+        // determines who has the lower score
         if(playerOneScore < playerTwoScore){
             document.getElementById(`winner`).innerHTML = 'Player wins';
         }else if(playerOneScore > playerTwoScore){
@@ -412,15 +451,50 @@ $(function(){
         console.log(`Player one score: ${playerOneScore}`)
         console.log(`Player two score: ${playerTwoScore}`)
     }
+
+    // sets values of face cards and aces
+    function setValues(playerGrid){
+        for(let i = 0; i < cards1.length; i++){
+            for(let j = 0; j < cards1[i].length; j++){
+                if(playerGrid[i][j] == 'JACK' || playerGrid[i][j] == 'QUEEN' || playerGrid[i][j] == 'KING'){
+                    playerGrid[i][j] = 10;
+                }else if(playerGrid[i][j] == 'ACE'){
+                    playerGrid[i][j] = 1;
+                }
+            }
+        }
+    }
+
+    // gets the sums of the rows
+    function rowSum(playerScore){
+        for(let row = 0; row < cards1.length; row++){
+            // if the row contains the same values, the sum of that row is zero
+            if(playerOne[row][0] == playerOne[row][1] && playerOne[row][0] == playerOne[row][2]){
+                playerScore += 0;
+            }else{
+                playerScore += Number(playerOne[row][0]) + Number(playerOne[row][1]) + Number(playerOne[row][2]);
+            }
+        }
+
+        return playerScore;
+    }
+
+    // gets the sums of the columns
+    function colSum(){
+        let playerScore = 0;
+        for(let col = 0; col < cards1.length; col++){
+            // if the col contains the same values, the sum of that row is zero
+            if(playerOne[0][col] == playerOne[1][col] && playerOne[0][col] == playerOne[2][col]){
+                playerScore += 0;
+            }else{
+                playerScore += Number(playerOne[0][col]) + Number(playerOne[1][col]) + Number(playerOne[2][col]);
+            }
+        }
+
+        return playerScore;
+    }
     
 })
-
-
-
-
-
-
-
 
 // function to get a new deck
 async function getDeck(){
