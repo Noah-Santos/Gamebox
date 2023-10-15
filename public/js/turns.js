@@ -367,6 +367,9 @@ $(function(){
         $('#deck').css('pointer-events', 'none');
         $('#discardPile').css('pointer-events', 'none');
 
+        let rowEqual = 0;
+        let rowEqual2 = 0;
+
         // fills in any missing grid spots
         for(let row = 0; row < cards1.length; row++){
             for(let col = 0; col < cards1[row].length; col++){
@@ -386,22 +389,13 @@ $(function(){
             }
         }
 
-        // calls function to set values
-        setValues(playerOne);
-        setValues(playerTwo);
-
         for(let i = 0; i < cards1.length; i++){
-            // determines if the row or column needs to be summed
+            // determines if the row or column has matching numbers
             if(playerOne[i][0] == playerOne[i][1] && playerOne[i][0] == playerOne[i][2]){
-                playerOneScore += rowSum();
-            }else{
-                playerOneScore += colSum();
+                rowEqual++;
             }
-
             if(playerTwo[i][0] == playerTwo[i][1] && playerTwo[i][0] == playerTwo[i][2]){
-                playerTwoScore += rowSum();
-            }else{
-                playerTwoScore += colSum();
+                rowEqual2++;
             }
 
             // for(let j = 0; j < cards1[i].length; j++){
@@ -440,6 +434,18 @@ $(function(){
             // }
         }
 
+        // determines which sum method to use
+        if(rowEqual >= 1){
+                playerOneScore += rowSum(playerOne);
+            }else{
+                playerOneScore += colSum(playerOne);
+            }
+            if(rowEqual2 >= 1){
+                playerTwoScore += rowSum(playerTwo);
+            }else{
+                playerTwoScore += colSum(playerTwo);
+            }
+
         // determines who has the lower score
         if(playerOneScore < playerTwoScore){
             document.getElementById(`winner`).innerHTML = 'Player wins';
@@ -453,42 +459,59 @@ $(function(){
     }
 
     // sets values of face cards and aces
-    function setValues(playerGrid){
-        for(let i = 0; i < cards1.length; i++){
-            for(let j = 0; j < cards1[i].length; j++){
-                if(playerGrid[i][j] == 'JACK' || playerGrid[i][j] == 'QUEEN' || playerGrid[i][j] == 'KING'){
-                    playerGrid[i][j] = 10;
-                }else if(playerGrid[i][j] == 'ACE'){
-                    playerGrid[i][j] = 1;
-                }
-            }
-        }
-    }
+    // function setValues(playerGrid){
+    //     for(let j = 0; j < cards1[i].length; j++){
+    //         if(playerGrid[i][j] == 'JACK' || playerGrid[i][j] == 'QUEEN' || playerGrid[i][j] == 'KING'){
+    //             playerGrid[i][j] = 10;
+    //         }else if(playerGrid[i][j] == 'ACE'){
+    //             playerGrid[i][j] = 1;
+    //         }
+    //     }
+    // }
 
     // gets the sums of the rows
-    function rowSum(playerScore){
+    function rowSum(player){
+        let playerScore = 0;
         for(let row = 0; row < cards1.length; row++){
             // if the row contains the same values, the sum of that row is zero
-            if(playerOne[row][0] == playerOne[row][1] && playerOne[row][0] == playerOne[row][2]){
+            if(player[row][0] == player[row][1] && player[row][0] == player[row][2]){
+                console.log('equal row')
                 playerScore += 0;
             }else{
-                playerScore += Number(playerOne[row][0]) + Number(playerOne[row][1]) + Number(playerOne[row][2]);
+                for(let col = 0; col < player[row].length; col++){
+                    if(player[row][col] == 'JACK' || player[row][col] == 'QUEEN' || player[row][col] == 'KING'){
+                        player[row][col] = 10;
+                    }else if(player[row][col] == 'ACE'){
+                        player[row][col] = 1;
+                    }
+                }
+                playerScore += Number(player[row][0]) + Number(player[row][1]) + Number(player[row][2]);
             }
+            console.log('this is the row score' + playerScore);
         }
 
         return playerScore;
     }
 
     // gets the sums of the columns
-    function colSum(){
+    function colSum(player){
         let playerScore = 0;
         for(let col = 0; col < cards1.length; col++){
             // if the col contains the same values, the sum of that row is zero
-            if(playerOne[0][col] == playerOne[1][col] && playerOne[0][col] == playerOne[2][col]){
+            if(player[0][col] == player[1][col] && player[0][col] == player[2][col]){
+                console.log('equal col')
                 playerScore += 0;
             }else{
-                playerScore += Number(playerOne[0][col]) + Number(playerOne[1][col]) + Number(playerOne[2][col]);
+                for(let row = 0; row < cards1[col].length; row++){
+                    if(player[row][col] == 'JACK' || player[row][col] == 'QUEEN' || player[row][col] == 'KING'){
+                        player[row][col] = 10;
+                    }else if(player[row][col] == 'ACE'){
+                        player[row][col] = 1;
+                    }
+                }
+                playerScore += Number(player[0][col]) + Number(player[1][col]) + Number(player[2][col]);
             }
+            console.log('this is the col score' + playerScore);
         }
 
         return playerScore;
