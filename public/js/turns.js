@@ -376,14 +376,13 @@ $(function(){
                 // if spot is empty, fill it in with a drawn card
                 if(playerOne[row][col] == 'x'){
                     draw = await fetch(`https://www.deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`).then(response =>{return response.json()});
-                    image = draw.cards[0].image;
-                    $(`#${cards1[row][col]}`).attr('src', image);
+                    document.getElementById(`${cards1[row][col]}`).src = draw.cards[0].image;
                     playerOne[row][col] = draw.cards[0].value;
 
-                }else if(playerTwo[row][col] == 'x'){
+                }
+                if(playerTwo[row][col] == 'x'){
                     draw = await fetch(`https://www.deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`).then(response =>{return response.json()});
-                    image = draw.cards[0].image;
-                    $(`#${cards1[row][col]}`).attr('src', image);
+                    document.getElementById(`${cards2[row][col]}`).src = draw.cards[0].image;
                     playerTwo[row][col] = draw.cards[0].value;
                 }
             }
@@ -475,7 +474,7 @@ $(function(){
         for(let row = 0; row < cards1.length; row++){
             // if the row contains the same values, the sum of that row is zero
             if(player[row][0] == player[row][1] && player[row][0] == player[row][2]){
-                console.log('equal row')
+                // console.log('equal row')
                 playerScore += 0;
             }else{
                 for(let col = 0; col < player[row].length; col++){
@@ -487,7 +486,7 @@ $(function(){
                 }
                 playerScore += Number(player[row][0]) + Number(player[row][1]) + Number(player[row][2]);
             }
-            console.log('this is the row score' + playerScore);
+            // console.log('this is the row score' + playerScore);
         }
 
         return playerScore;
@@ -499,7 +498,7 @@ $(function(){
         for(let col = 0; col < cards1.length; col++){
             // if the col contains the same values, the sum of that row is zero
             if(player[0][col] == player[1][col] && player[0][col] == player[2][col]){
-                console.log('equal col')
+                // console.log('equal col')
                 playerScore += 0;
             }else{
                 for(let row = 0; row < cards1[col].length; row++){
@@ -511,7 +510,7 @@ $(function(){
                 }
                 playerScore += Number(player[0][col]) + Number(player[1][col]) + Number(player[2][col]);
             }
-            console.log('this is the col score' + playerScore);
+            // console.log('this is the col score' + playerScore);
         }
 
         return playerScore;
