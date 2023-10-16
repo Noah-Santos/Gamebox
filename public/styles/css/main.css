@@ -165,34 +165,33 @@ body nav .navContent .containerLink .navLink {
   padding-bottom: 1vh;
 }
 
-.loginTitle {
-  font-size: 15vh;
+.loginSection {
+  height: 60%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.loginSection .loginTitle {
+  font-size: 5rem;
   text-align: center;
   margin: 20px;
   color: white;
   transform: translate(0px, 0vh);
   animation: titleDrop 2s none;
 }
-
-@keyframes titleDrop {
-  from {
-    transform: translate(0px, -15vh);
-  }
-  to {
-    transform: translate(0px, 0vh);
-  }
-}
-.loginBlock {
+.loginSection .loginBlock {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 70vh;
-  width: 100vw;
+  align-content: space-evenly;
+  width: 100%;
 }
-.loginBlock .loginInfo {
+.loginSection .loginBlock .loginInfo {
   animation: loginSlide 3s none linear;
+  display: flex;
+  flex-direction: column;
 }
-.loginBlock input {
+.loginSection .loginBlock input {
   width: 25vw;
   height: auto;
   font-size: 50px;
@@ -203,32 +202,26 @@ body nav .navContent .containerLink .navLink {
   text-align: center;
   transform: translate(0, 0);
   opacity: 1;
+  margin: 1rem;
 }
-.loginBlock input:focus {
+.loginSection .loginBlock input:focus {
   outline: 0;
   border: 0;
   border-bottom: 2px solid black;
 }
-.loginBlock input::placeholder {
+.loginSection .loginBlock input::placeholder {
   color: white;
 }
-.loginBlock button {
+.loginSection .loginBlock button {
   width: 25vw;
   height: auto;
   font-size: 50px;
   background-color: blueviolet;
   color: white;
   border-radius: 12px;
+  margin: 1rem;
 }
 
-@keyframes loginSlide {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
 .cardHolder {
   display: flex;
   justify-content: space-between;
@@ -246,6 +239,120 @@ body nav .navContent .containerLink .navLink {
   width: 15vw;
 }
 
+@keyframes titleDrop {
+  from {
+    transform: translate(0px, -15vh);
+  }
+  to {
+    transform: translate(0px, 0vh);
+  }
+}
+@keyframes loginSlide {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes cards {
+  from {
+    transform: translate(0px, -300vh);
+  }
+  to {
+    transform: translate(0px, -110vh);
+  }
+}
+.registerSection {
+  height: 75%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.registerSection .registerTitle {
+  font-size: 5rem;
+  text-align: center;
+  margin: 20px;
+  color: white;
+  transform: translate(0px, 0vh);
+  animation: titleDrop 2s none;
+}
+.registerSection .registerBlock {
+  display: flex;
+  justify-content: center;
+  align-content: space-evenly;
+  width: 100%;
+}
+.registerSection .registerBlock .registerInfo {
+  animation: registerSlide 3s none linear;
+  display: flex;
+  flex-direction: column;
+}
+.registerSection .registerBlock input {
+  width: 25vw;
+  height: auto;
+  font-size: 50px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid black;
+  color: white;
+  text-align: center;
+  transform: translate(0, 0);
+  opacity: 1;
+  margin: 1rem;
+}
+.registerSection .registerBlock input:focus {
+  outline: 0;
+  border: 0;
+  border-bottom: 2px solid black;
+}
+.registerSection .registerBlock input::placeholder {
+  color: white;
+}
+.registerSection .registerBlock button {
+  width: 25vw;
+  height: auto;
+  font-size: 50px;
+  background-color: blueviolet;
+  color: white;
+  border-radius: 12px;
+  margin: 1rem;
+}
+
+.cardHolder {
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
+  height: auto;
+  transform: translate(0px, -110vh);
+  animation: cards 5s ease-in-out;
+  animation-delay: 0s;
+}
+.cardHolder .cardSets {
+  display: flex;
+  flex-direction: column;
+}
+.cardHolder .cardSets img {
+  width: 15vw;
+}
+
+@keyframes titleDrop {
+  from {
+    transform: translate(0px, -15vh);
+  }
+  to {
+    transform: translate(0px, 0vh);
+  }
+}
+@keyframes registerSlide {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 @keyframes cards {
   from {
     transform: translate(0px, -300vh);
