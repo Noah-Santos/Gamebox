@@ -1,0 +1,39 @@
+body{
+    // holds the home page of the website
+    .dashBoardSection{
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        margin: 1rem;
+
+        // section about the iser information
+        #userInfo{
+            display: flex;
+            flex-direction: column;
+            background-color: #1e1e1e;
+            color: white;
+            width: 40%;
+        }
+
+        // holds the leaderboard
+        #leaderboard{
+            display: flex;
+            flex-direction: column;
+            background-color: #1e1e1e;
+            color: white;
+            width: 40%;
+        }
+    }
+
+    // edits the title of the page
+    .dashboardTitle {
+        font-size: 5rem;
+        // font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        text-align: center;
+        margin: 20px;
+        color: white;
+        transform: translate(0px, -0vh);
+        animation: titleDrop 1s none;
+    }
+}

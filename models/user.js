@@ -20,6 +20,10 @@ const UserSchema  = new mongoose.Schema({
         type: Date,
         default : Date.now
     },
+    games :{
+        type : Number,
+        default : 0
+    },
     wins :{
         type : Number,
         default : 0

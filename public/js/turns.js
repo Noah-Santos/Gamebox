@@ -27,11 +27,44 @@ $(function(){
     let cards1 = [["card1.1", "card1.2", "card1.3"], ["card1.4", "card1.5", "card1.6"], ["card1.7", "card1.8", "card1.9"]];
     let cards2 = [["card2.1", "card2.2", "card2.3"], ["card2.4", "card2.5", "card2.6"], ["card2.7", "card2.8", "card2.9"]];
 
-    // makes sure that the game has started
-    $('#btnDiv').on('click', function(){ 
+
+     // when burger is clicked, open nav
+    $("#burger").on('click', function(){
+        console.log('click')
+        document.getElementById("nav").style.transform = "translateX(0%)"
+        $(".nav").delay(50).promise().done(function(){
+            $(".x").css("display", "block");
+            // $(".navLink").css("display", "flex");
+        });
+        $("section").css("filter", "blur(4px)");
+        $("#pickedCard").css("filter", "blur(4px)");
+    });
+
+    // when x is clicked, close nav
+    $(".x").on('click', function(){
+        $(".x").css("display", "none");
+        // $(".navLink").css("display", "none");
+         document.getElementById("nav").style.transform = "translateX(-100%)"
+
+        //  prevents everything from unblurring until the game starts
+         if(started){
+            $("section").css("filter", "blur(0px)");
+            $("#pickedCard").css("filter", "blur(0px)");
+        }
+        $('#btnDiv').css("filter", "blur(0px)");
+    }); 
+
+
+    // blurs the screen until the start button is clicked
+    // also makes sure that the nav doesn't unblur everything until game starts
+    $('#btnDiv').css('display','flex');
+    $('section').css("filter", "blur(4px)");
+    $('#btnDiv').css("filter", "blur(0px)");
+    $('#btnDiv').on('click', function(){
+        $('section').css("filter", "blur(0px)"); 
         started = true; 
         turns = 1;
-    })
+    })  
 
     // keeps track of which cards have been clicked already
     let chosenCards = [];
@@ -45,6 +78,7 @@ $(function(){
             // console.log($(this).attr('id'))
             
             // $(this).css('display', 'none');
+            // if no card was selected from the deck, then draw a new card
             if(!picked){
                 draw = await fetch(`https://www.deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`).then(response =>{return response.json()});
             }
@@ -53,9 +87,11 @@ $(function(){
             // console.log(draw)
             // console.log(draw.cards[0])
             // console.log(draw.cards.image)
+
             // if it is the first turn, let player flip three cards
             if(turns == 1 && sessionStorage.getItem('start')){
                 let inArr = false;
+                // makes sure that the same card can't be clicked twice during the first turn
                 for(let i = 0; i < chosenCards.length; i++){
                     if($(this).attr('id') == chosenCards[i]){
                         inArr = true;
@@ -63,6 +99,7 @@ $(function(){
                 }
                 if(!inArr){
                     // console.log('passed1')
+                    // if the card has not been clicked, change the image to a new card
                     moves++;
                     $(this).attr('src', draw.cards[0].image).animate({opacity:1}, 100);
                     chosenCards.push($(this).attr('id'));
@@ -76,7 +113,7 @@ $(function(){
                     }
                 }
                 
-
+                // if they flipped three cards on first turn, end the turn
                 if(moves == 3){
                     moves = 0;
                     turns++;
@@ -118,6 +155,7 @@ $(function(){
             // if it is the second turn, let player flip three cards
             }else if(turns == 2 && sessionStorage.getItem('start')){
                 let inArr = false;
+                // makes sure that the same card can't be clicked twice during the first turn
                 for(let i = 0; i < chosenCards.length; i++){
                     if($(this).attr('id') == chosenCards[i]){
                         inArr = true;
@@ -125,6 +163,7 @@ $(function(){
                 }
                 if(!inArr){
                     // console.log('passed1')
+                    // if the card has not been clicked, change the image to a new card
                     moves++;
                     $(this).attr('src', draw.cards[0].image).animate({opacity:1}, 100);
                     chosenCards.push($(this).attr('id'));
@@ -138,7 +177,7 @@ $(function(){
                     }
                 }
                 
-
+                // if they flipped three cards on first turn, end the turn
                 if(moves == 3){
                     moves = 0;
                     turns++;
@@ -343,7 +382,7 @@ $(function(){
     function checkWinner(){
         let countOne = 0;
         let countTwo = 0;
-        // checks if the either of the player grids are full or not
+        // checks if the grid spot is filled, add one to the count
         for(let i = 0; i < playerOne.length; i++){
             for(let j = 0; j < playerOne[i].length; j++){
                 if(playerOne[i][j] != 'x'){
@@ -354,6 +393,7 @@ $(function(){
                 }
             }
         }
+        // if the grid is full, sum the scores and determines who wins
         if(countOne == 9 || countTwo == 9){
             console.log('Game over')
             sumScore();
@@ -565,4 +605,9 @@ function btnChange(){
     document.getElementById("btnDiv").style.display = "none";
     document.getElementById("boards").style.width = "150%";
     sessionStorage.setItem('start', true);
+}
+
+// reloads the page to restart
+function restart(){
+    location.reload();
 }

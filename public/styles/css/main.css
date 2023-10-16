@@ -138,8 +138,8 @@ body nav .navContent {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  margin-top: 5rem;
-  height: 60%;
+  margin-top: 10rem;
+  height: 40%;
 }
 body nav .navContent .x {
   position: absolute;
@@ -178,7 +178,7 @@ body nav .navContent .containerLink .navLink {
   margin: 20px;
   color: white;
   transform: translate(0px, 0vh);
-  animation: titleDrop 2s none;
+  animation: titleDrop 1s none;
 }
 .loginSection .loginBlock {
   display: flex;
@@ -361,6 +361,36 @@ body nav .navContent .containerLink .navLink {
     transform: translate(0px, -110vh);
   }
 }
+body .dashBoardSection {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin: 1rem;
+}
+body .dashBoardSection #userInfo {
+  display: flex;
+  flex-direction: column;
+  background-color: #1e1e1e;
+  color: white;
+  width: 40%;
+}
+body .dashBoardSection #leaderboard {
+  display: flex;
+  flex-direction: column;
+  background-color: #1e1e1e;
+  color: white;
+  width: 40%;
+}
+body .dashboardTitle {
+  font-size: 5rem;
+  text-align: center;
+  margin: 20px;
+  color: white;
+  transform: translate(0px, 0vh);
+  animation: titleDrop 1s none;
+}
+
 * {
   margin: 0;
   padding: 0;
