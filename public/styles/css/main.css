@@ -152,6 +152,7 @@ body nav .navContent .x {
   display: none;
 }
 body nav .navContent .containerLink {
+  width: -moz-fit-content;
   width: fit-content;
 }
 body nav .navContent .containerLink .navLink {
@@ -165,104 +166,36 @@ body nav .navContent .containerLink .navLink {
   padding-bottom: 1vh;
 }
 
-.loginSection {
-  height: 60%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.loginSection .loginTitle {
-  font-size: 5rem;
-  text-align: center;
-  margin: 20px;
-  color: white;
-  transform: translate(0px, 0vh);
-  animation: titleDrop 1s none;
-}
-.loginSection .loginBlock {
-  display: flex;
-  justify-content: center;
-  align-content: space-evenly;
-  width: 100%;
-}
-.loginSection .loginBlock .loginInfo {
-  animation: loginSlide 3s none linear;
-  display: flex;
-  flex-direction: column;
-}
-.loginSection .loginBlock input {
-  width: 25vw;
-  height: auto;
-  font-size: 50px;
-  background: none;
-  border: none;
-  border-bottom: 2px solid black;
-  color: white;
-  text-align: center;
-  transform: translate(0, 0);
-  opacity: 1;
-  margin: 1rem;
-}
-.loginSection .loginBlock input:focus {
-  outline: 0;
-  border: 0;
-  border-bottom: 2px solid black;
-}
-.loginSection .loginBlock input::placeholder {
-  color: white;
-}
-.loginSection .loginBlock button {
-  width: 25vw;
-  height: auto;
-  font-size: 50px;
-  background-color: blueviolet;
-  color: white;
-  border-radius: 12px;
-  margin: 1rem;
-}
-
-.cardHolder {
-  display: flex;
-  justify-content: space-between;
+.loginBody {
   width: 100vw;
-  height: auto;
-  transform: translate(0px, -110vh);
-  animation: cards 5s ease-in-out;
-  animation-delay: 0s;
-}
-.cardHolder .cardSets {
-  display: flex;
-  flex-direction: column;
-}
-.cardHolder .cardSets img {
-  width: 15vw;
+  height: 100vh;
+  background-image: url("../../images/loginBG.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: brightness(50%);
+  z-index: 100;
+  margin: 0;
+  padding: 0;
 }
 
-@keyframes titleDrop {
-  from {
-    transform: translate(0px, -15vh);
-  }
-  to {
-    transform: translate(0px, 0vh);
-  }
+.main {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  position: absolute;
 }
-@keyframes loginSlide {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+
+.second {
+  width: 50vw;
+  height: 35vh;
+  z-index: 200;
+  background-color: lightgrey;
+  margin-left: 3vw;
 }
-@keyframes cards {
-  from {
-    transform: translate(0px, -300vh);
-  }
-  to {
-    transform: translate(0px, -110vh);
-  }
-}
+
 .registerSection {
   height: 75%;
   width: 100%;
@@ -275,8 +208,9 @@ body nav .navContent .containerLink .navLink {
   text-align: center;
   margin: 20px;
   color: white;
-  transform: translate(0px, 0vh);
-  animation: titleDrop 2s none;
+  transform: translate(0px, -20vh);
+  animation: titleDrop 2s 0.5s none;
+  animation-fill-mode: forwards;
 }
 .registerSection .registerBlock {
   display: flex;
@@ -285,8 +219,10 @@ body nav .navContent .containerLink .navLink {
   width: 100%;
 }
 .registerSection .registerBlock .registerInfo {
-  animation: registerSlide 3s none linear;
+  animation: registerSlide 3s 0.5s none linear;
+  animation-fill-mode: forwards;
   display: flex;
+  opacity: 0;
   flex-direction: column;
 }
 .registerSection .registerBlock input {
@@ -307,6 +243,9 @@ body nav .navContent .containerLink .navLink {
   border: 0;
   border-bottom: 2px solid black;
 }
+.registerSection .registerBlock input::-moz-placeholder {
+  color: white;
+}
 .registerSection .registerBlock input::placeholder {
   color: white;
 }
@@ -325,16 +264,16 @@ body nav .navContent .containerLink .navLink {
   justify-content: space-between;
   width: 100vw;
   height: auto;
-  transform: translate(0px, -110vh);
-  animation: cards 5s ease-in-out;
-  animation-delay: 0s;
+  transform: translate(0px, -300vh);
+  animation: cards 3s 0.5s ease-in-out;
+  animation-fill-mode: forwards;
 }
 .cardHolder .cardSets {
   display: flex;
   flex-direction: column;
 }
 .cardHolder .cardSets img {
-  width: 15vw;
+  width: 7vw;
 }
 
 @keyframes titleDrop {
@@ -358,7 +297,7 @@ body nav .navContent .containerLink .navLink {
     transform: translate(0px, -300vh);
   }
   to {
-    transform: translate(0px, -110vh);
+    transform: translate(0px, -90vh);
   }
 }
 body .dashBoardSection {
