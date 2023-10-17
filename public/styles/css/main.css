@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   font-family: batman2;
-  color: rgb(151, 151, 151);
+  color: white;
 }
 
 body, html {
@@ -18,7 +18,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: batman2;
-  color: rgb(151, 151, 151);
+  color: white;
 }
 
 body, html {
@@ -44,7 +44,7 @@ body .winnerText {
   width: 100vw;
 }
 body .winnerText h1 {
-  color: #1e1e1e;
+  color: #636363;
   font-size: 4rem;
 }
 body #pickedCard {
@@ -106,7 +106,7 @@ body #btnDiv .mainBTN {
   height: auto;
   font-size: 180px;
   border-radius: 10px;
-  background-color: #1e1e1e;
+  background-color: #636363;
   z-index: 2000;
   /* transform: translate(0px, -300px); */
   transition: all 0.5s;
@@ -130,7 +130,7 @@ body nav {
   left: 0rem;
   z-index: 10;
   transform: translateX(-100%);
-  background-color: #1e1e1e;
+  background-color: #3e3e3e;
   transition: all 0.5s;
 }
 body nav .navContent {
@@ -363,24 +363,33 @@ body nav .navContent .containerLink .navLink {
 }
 body .dashBoardSection {
   height: 100%;
-  width: 100%;
   display: flex;
   flex-direction: row;
-  margin: 1rem;
+  justify-content: space-evenly;
 }
 body .dashBoardSection #userInfo {
+  border-radius: 1rem;
   display: flex;
   flex-direction: column;
-  background-color: #1e1e1e;
+  align-items: center;
+  background-color: #636363;
   color: white;
   width: 40%;
+  height: 50%;
+  padding: 1rem;
+}
+body .dashBoardSection #userInfo #username {
+  font-size: 4rem;
 }
 body .dashBoardSection #leaderboard {
+  border-radius: 1rem;
   display: flex;
   flex-direction: column;
-  background-color: #1e1e1e;
+  background-color: #636363;
   color: white;
   width: 40%;
+  height: 75%;
+  padding: 1rem;
 }
 body .dashboardTitle {
   font-size: 5rem;

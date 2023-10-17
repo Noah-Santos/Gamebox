@@ -2,27 +2,60 @@ body{
     // holds the home page of the website
     .dashBoardSection{
         height: 100%;
-        width: 100%;
+        // width: 100%;
         display: flex;
         flex-direction: row;
-        margin: 1rem;
+        justify-content: space-evenly;
+        // margin: 1rem;
 
         // section about the iser information
         #userInfo{
+            border-radius: 1rem;
             display: flex;
             flex-direction: column;
-            background-color: #1e1e1e;
+            align-items: center;
+            background-color: #636363;
             color: white;
             width: 40%;
+            height: 50%;
+            padding: 1rem;
+
+            // edits the current user's name
+            #username{
+                font-size: 4rem;
+            }
+
+            // edits the user's games played
+            #userGame{
+
+            }
+
+            // edits the user's won games
+            #userWins{
+
+            }
+
+            // edits the user's loses
+            #userLoses{
+
+            }
+
+            // edits the user's win:loss ratio
+            #userRatio{
+
+            }
         }
 
         // holds the leaderboard
         #leaderboard{
+            border-radius: 1rem;
             display: flex;
             flex-direction: column;
-            background-color: #1e1e1e;
+            background-color: #636363;
             color: white;
             width: 40%;
+            height: 75%;
+            padding: 1rem;
         }
     }
 
