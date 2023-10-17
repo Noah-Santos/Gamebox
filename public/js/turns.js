@@ -34,7 +34,6 @@ $(function(){
         document.getElementById("nav").style.transform = "translateX(0%)"
         $(".nav").delay(50).promise().done(function(){
             $(".x").css("display", "block");
-            // $(".navLink").css("display", "flex");
         });
         $("section").css("filter", "blur(4px)");
         $("#pickedCard").css("filter", "blur(4px)");
@@ -43,7 +42,6 @@ $(function(){
     // when x is clicked, close nav
     $(".x").on('click', function(){
         $(".x").css("display", "none");
-        // $(".navLink").css("display", "none");
          document.getElementById("nav").style.transform = "translateX(-100%)"
 
         //  prevents everything from unblurring until the game starts
@@ -74,19 +72,10 @@ $(function(){
         replace = $(this).attr('src');
         $('#discardPile').css('pointer-events', 'auto');
         if(started){
-            // console.log(chosenCards);
-            // console.log($(this).attr('id'))
-            
-            // $(this).css('display', 'none');
             // if no card was selected from the deck, then draw a new card
             if(!picked){
                 draw = await fetch(`https://www.deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`).then(response =>{return response.json()});
             }
-            
-            // console.log(`it is turn ${turns}`)
-            // console.log(draw)
-            // console.log(draw.cards[0])
-            // console.log(draw.cards.image)
 
             // if it is the first turn, let player flip three cards
             if(turns == 1 && sessionStorage.getItem('start')){
@@ -98,7 +87,6 @@ $(function(){
                     }
                 }
                 if(!inArr){
-                    // console.log('passed1')
                     // if the card has not been clicked, change the image to a new card
                     moves++;
                     $(this).attr('src', draw.cards[0].image).animate({opacity:1}, 100);
@@ -122,8 +110,6 @@ $(function(){
                     setTimeout(function(){
                         document.getElementById("boards").style.transform = "translate(-50vw,0px)";
                     }, 500);
-                    
-                    // console.log(turns);
                 }
 
             // makes sure that a card is picked
@@ -136,7 +122,6 @@ $(function(){
                     for(let j = 0; j < cards1[i].length; j++){
                         if($(this).attr('id') == cards1[i][j]){
                             cardUpdate(i,j,1,true);
-                            // discardPileUpdate();
                         }
                     }
                 }
@@ -162,7 +147,6 @@ $(function(){
                     }
                 }
                 if(!inArr){
-                    // console.log('passed1')
                     // if the card has not been clicked, change the image to a new card
                     moves++;
                     $(this).attr('src', draw.cards[0].image).animate({opacity:1}, 100);
@@ -187,8 +171,6 @@ $(function(){
                         document.getElementById("boards").style.transform = "translate(00vw,0px)";
                     }, 500);
                     firstTurns = true;
-                    
-                    // console.log(turns);
                 }
 
             // makes sure that a card is picked
@@ -205,7 +187,6 @@ $(function(){
                     for(let j = 0; j < cards2[i].length; j++){
                         if($(this).attr('id') == cards2[i][j]){
                             cardUpdate(i,j,2, true);
-                            // discardPileUpdate();
                         }
                     }
                 }
@@ -218,6 +199,8 @@ $(function(){
                 firstMove = false;
             }
         }
+
+        // checks to see if the game is over or not every turn
         checkWinner();
 
         if(finished){
@@ -234,32 +217,21 @@ $(function(){
     // makes the card follow the mouse at all times
     document.addEventListener("mousemove", card);
     $('#deck').on('click', async function(e){
-        // console.log('click')
         // makes sure the first opening moves are done first
         if(firstTurns && !firstMove){
-            // console.log('work')
             // sets variable to true, indicating that a card is selected
             picked = true;
-            // console.log(picked)
             // sets pciked card image to a drawn card image
             draw = await fetch(`https://www.deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`).then(response =>{return response.json()});
             $('#pickedCard').attr('src', draw.cards[0].image);
-            // console.log('draw')
-            // displays the card
             $('#pickedCard').css({display: 'block', filter: 'blur(0px)'});
-            // console.log('ayy')
-            // $('#deck').css('pointer-events', 'none');
             firstMove = true;
         }else if(firstMove){
             $('#deck').css('pointer-events', 'none');
         }
     })
 
-    // if($('#discardPile').attr('src') == 'https://www.deckofcardsapi.com/static/img/back.png'){
-        
-    // }
     $('#discardPile').on('click', async function(){
-        // console.log(firstMove)
         // lets player discard the card they drew and switch turns
         if(picked){
             $('#discardPile').attr('src', $('#pickedCard').attr('src'));
@@ -282,7 +254,6 @@ $(function(){
             discard[1] = draw.cards[0].image;
 
         }else if(firstTurns && !firstMove && turns > 3){
-            // console.log('yes');
             // set the picled card to the card that is on top
             $('#pickedCard').attr('src', $(this).attr('src'));
             $('#pickedCard').css({display: 'block'});
@@ -292,15 +263,12 @@ $(function(){
             console.log(draw.cards[0]);
 
             // displays the card
-            // $('#pickedCard').css({display: 'block', filter: 'blur(0px)'});
             $(this).css('pointer-events', 'none');
             firstMove = true;
             picked = true;
         }else{
-            // $('#deck').attr('src', $('#pickedCard').attr('src'));
         }
     })
-    
 
     // indicates what the user is hovering over when the card is selected
     $('.card').on( "mouseenter", function(){
@@ -312,12 +280,6 @@ $(function(){
             $(this).animate({opacity:1}, 100);
         }
     })
-
-    // if(picked){
-    //     $('.card').on('click', function(){
-
-    //     })
-    // }
     
     // updates the grids of both players
     function cardUpdate(row, col, player, run){
@@ -359,7 +321,6 @@ $(function(){
             discard[0] = draw.cards[0].value;
             discard[1] = draw.cards[0].image;
         }
-        // console.log(discard);
 
         if(discard[1] == 'x'){
             $('#discardPile').attr('src', 'https://www.deckofcardsapi.com/static/img/back.png');
@@ -416,12 +377,14 @@ $(function(){
                 // if spot is empty, fill it in with a drawn card
                 if(playerOne[row][col] == 'x'){
                     draw = await fetch(`https://www.deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`).then(response =>{return response.json()});
+                    // changes both the array and the actual page
                     document.getElementById(`${cards1[row][col]}`).src = draw.cards[0].image;
                     playerOne[row][col] = draw.cards[0].value;
 
                 }
                 if(playerTwo[row][col] == 'x'){
                     draw = await fetch(`https://www.deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`).then(response =>{return response.json()});
+                    // changes both the array and the actual page
                     document.getElementById(`${cards2[row][col]}`).src = draw.cards[0].image;
                     playerTwo[row][col] = draw.cards[0].value;
                 }
@@ -436,41 +399,6 @@ $(function(){
             if(playerTwo[i][0] == playerTwo[i][1] && playerTwo[i][0] == playerTwo[i][2]){
                 rowEqual2++;
             }
-
-            // for(let j = 0; j < cards1[i].length; j++){
-            //     draw = await fetch(`https://www.deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`).then(response =>{return response.json()});
-            //     image = draw.cards[0].image;
-            //     // if the slot is empty, draw a card to fill the spot
-            //     if(playerOne[i][j] == 'x'){
-            //         $(`#${cards1[i][j]}`).attr('src', image);
-            //         playerOne[i][j] = draw.cards[0].value;
-            //     }
-            //     // sets the value for face cards and aces
-            //     // if(playerOne[i][j] == 'JACK' || playerOne[i][j] == 'QUEEN' || playerOne[i][j] == 'KING'){
-            //     //     playerOne[i][j] = 10;
-            //     // }else if(playerOne[i][j] == 'ACE'){
-            //     //     playerOne[i][j] = 1;
-            //     // }
-            //     playerOneScore += Number(playerOne[i][j]);
-
-            //     // if the slot is empty, draw a card to fill the spot
-            //     if(playerTwo[i][j] == 'x'){
-            //         console.log(draw.cards[0].image)
-            //         console.log(cards2[i][j])
-            //         console.log($(`#${cards2[i][j]}`))
-            //         // document.findElementById(`${cards2[i][j]}`).src = `${draw.cards[0].image}`
-            //         $(`#${cards2[i][j]}`).attr('src', image);
-            //         console.log('success')
-            //         playerTwo[i][j] = draw.cards[0].value;
-            //     }
-            //     // sets the value for face cards and aces
-            //     // if(playerTwo[i][j] == 'JACK' || playerTwo[i][j] == 'QUEEN' || playerTwo[i][j] == 'KING'){
-            //     //     playerTwo[i][j] = 10;
-            //     // }else if(playerTwo[i][j] == 'ACE'){
-            //     //     playerTwo[i][j] = 1;
-            //     // }
-            //     playerTwoScore += Number(playerTwo[i][j]);
-            // }
         }
 
         // determines which sum method to use
@@ -497,24 +425,12 @@ $(function(){
         console.log(`Player two score: ${playerTwoScore}`)
     }
 
-    // sets values of face cards and aces
-    // function setValues(playerGrid){
-    //     for(let j = 0; j < cards1[i].length; j++){
-    //         if(playerGrid[i][j] == 'JACK' || playerGrid[i][j] == 'QUEEN' || playerGrid[i][j] == 'KING'){
-    //             playerGrid[i][j] = 10;
-    //         }else if(playerGrid[i][j] == 'ACE'){
-    //             playerGrid[i][j] = 1;
-    //         }
-    //     }
-    // }
-
     // gets the sums of the rows
     function rowSum(player){
         let playerScore = 0;
         for(let row = 0; row < cards1.length; row++){
             // if the row contains the same values, the sum of that row is zero
             if(player[row][0] == player[row][1] && player[row][0] == player[row][2]){
-                // console.log('equal row')
                 playerScore += 0;
             }else{
                 for(let col = 0; col < player[row].length; col++){
@@ -538,7 +454,6 @@ $(function(){
         for(let col = 0; col < cards1.length; col++){
             // if the col contains the same values, the sum of that row is zero
             if(player[0][col] == player[1][col] && player[0][col] == player[2][col]){
-                // console.log('equal col')
                 playerScore += 0;
             }else{
                 for(let row = 0; row < cards1[col].length; row++){
@@ -550,7 +465,6 @@ $(function(){
                 }
                 playerScore += Number(player[0][col]) + Number(player[1][col]) + Number(player[2][col]);
             }
-            // console.log('this is the col score' + playerScore);
         }
 
         return playerScore;
@@ -562,21 +476,11 @@ $(function(){
 async function getDeck(){
     // get new shuffled deck
     let deck = await fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1').then(response =>{return response.json()});
-    // console.log(deck);
 
     // get deck id
     let deck_id = deck.deck_id;
-    // console.log(deck_id);
 
-    // draw a card
-    // let draw = await fetch(`https://www.deckofcardsapi.com/api/deck/${deck_id}/draw/?count=1`).then(response =>{return response.json()});
-    // console.log(draw);
     sessionStorage.setItem('deck', deck_id);
-
-    // print value and suit of chosen card
-    // let value = draw.cards[0].value;
-    // let suit = draw.cards[0].suit;
-    // console.log(`${value} of ${suit}`);
 }
 
 // resets the turn to one if the game is started
@@ -586,22 +490,6 @@ function newGame(){
 
 // onclick for the main start button
 function btnChange(){
-    // if(playerTurn === 0){
-    //     document.getElementById("btnDiv").style.width = "20vw";
-    //     document.getElementById("btnDiv").style.fontSize = "20px";
-    //     document.getElementById("btnDiv2").style.transform = "translate(0px, -5vh)";
-    //     document.getElementById("mainBTN").innerHTML = "Player 1's Turn";
-    //     document.getElementById("boards").style.width = "150%";
-    //     playerTurn = 1;
-    // } else if(playerTurn === 1){
-    //     document.getElementById("mainBTN").innerHTML = "Player 2's Turn";
-    //     playerTurn = 2;
-    //     document.getElementById("boards").style.transform = "translate(-50vw,0px)";
-    // } else if (playerTurn === 2){
-    //     document.getElementById("mainBTN").innerHTML = "Player 1's Turn";
-    //     playerTurn = 1;
-    //     document.getElementById("boards").style.transform = "translate(0vw,0px)";
-    // }
     document.getElementById("btnDiv").style.display = "none";
     document.getElementById("boards").style.width = "150%";
     sessionStorage.setItem('start', true);

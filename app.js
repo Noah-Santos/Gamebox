@@ -53,6 +53,7 @@ app.use((req, res, next) => {
 // routes
 app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/users'));
+app.use('/public', express.static('./views/public'));
 
 // allows for a fail save if one of the ports fails
 // will only run on the first one that works

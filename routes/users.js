@@ -100,6 +100,7 @@ router.post('/login', (req,res,next)=>{
         failureRedirect: '/users/login',
         failureFlash: true,
     })(req,res,next);
+    console.log('logged in')
 })
 
 router.get('/logout', (req, res)=>{
