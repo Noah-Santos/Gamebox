@@ -13,8 +13,9 @@
         text-align: center;
         margin: 20px;
         color: white;
-        transform: translate(0px, -0vh);
-        animation: titleDrop 2s none;
+        transform: translate(0px, -20vh);
+        animation: titleDrop 2s 0.5s none;
+        animation-fill-mode: forwards;
     }
 
     // section for the information
@@ -27,8 +28,10 @@
         width: 100%;
 
         .registerInfo {
-            animation: registerSlide 3s none linear;
+            animation: registerSlide 3s 0.5s none linear;
+            animation-fill-mode: forwards;
             display: flex;
+            opacity: 0;
             flex-direction: column;
         }
 
@@ -78,9 +81,9 @@
     justify-content: space-between;
     width: 100vw;
     height: auto;
-    transform: translate(0px, -110vh);
-    animation: cards 5s ease-in-out;
-    animation-delay: 0s;
+    transform: translate(0px, -300vh);
+    animation: cards 3s 0.5s ease-in-out;
+    animation-fill-mode: forwards;
 
     // one set of cards
     .cardSets {
@@ -88,7 +91,7 @@
         flex-direction: column;
 
         img {
-            width: 15vw;
+            width: 7vw;
         }
     }
 }
@@ -122,6 +125,6 @@
     }
 
     to {
-        transform: translate(0px, -110vh)
+        transform: translate(0px, -90vh)
     }
 }
