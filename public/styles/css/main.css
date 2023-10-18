@@ -30,24 +30,24 @@ body {
   overflow: hidden;
 }
 
-body {
+#gameBody {
   width: 100%;
   background-repeat: no-repeat;
   background-size: cover;
   background-image: radial-gradient(rgb(0, 189, 0), rgb(0, 156, 0), rgb(0, 99, 0));
 }
-body .winnerText {
+#gameBody .winnerText {
   display: flex;
   justify-content: space-around;
   position: absolute;
   align-items: center;
   width: 100vw;
 }
-body .winnerText h1 {
-  color: #636363;
+#gameBody .winnerText h1 {
+  color: white;
   font-size: 4rem;
 }
-body #pickedCard {
+#gameBody #pickedCard {
   width: 10.7vw;
   margin: 0.5vw;
   height: auto;
@@ -56,7 +56,7 @@ body #pickedCard {
   z-index: 9;
   pointer-events: none;
 }
-body .board {
+#gameBody .board {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -64,34 +64,34 @@ body .board {
   height: 100vh;
   transition: all 0.5s;
 }
-body .board .centerCard {
+#gameBody .board .centerCard {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-body .board .centerCard .card {
+#gameBody .board .centerCard .card {
   width: 10.7vw;
   margin: 0.5vw;
   height: auto;
   z-index: 5;
 }
-body .board .playerBoard {
+#gameBody .board .playerBoard {
   display: flex;
   flex-direction: column;
   margin: 0vw 5vw 0vw 5vw;
 }
-body .board .playerBoard .row {
+#gameBody .board .playerBoard .row {
   display: flex;
   flex-direction: row;
 }
-body .board .playerBoard .row .card {
+#gameBody .board .playerBoard .row .card {
   width: 10.7vw;
   margin: 0.5vw;
   height: auto;
   z-index: 5;
 }
-body #btnDiv {
+#gameBody #btnDiv {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -101,7 +101,7 @@ body #btnDiv {
   transform: translate(0px, -62.4vh);
   transition: all 0.5s;
 }
-body #btnDiv .mainBTN {
+#gameBody #btnDiv .mainBTN {
   width: 80vw;
   height: auto;
   font-size: 180px;
@@ -152,6 +152,7 @@ body nav .navContent .x {
   display: none;
 }
 body nav .navContent .containerLink {
+  width: -moz-fit-content;
   width: fit-content;
 }
 body nav .navContent .containerLink .navLink {
@@ -223,6 +224,9 @@ body nav .navContent .containerLink .navLink {
   outline: 0;
   border: 0;
   border-bottom: 2px solid rgb(255, 255, 255);
+}
+.loginBody .loginSection .loginBlock .loginInfo input::-moz-placeholder {
+  color: rgb(255, 255, 255);
 }
 .loginBody .loginSection .loginBlock .loginInfo input::placeholder {
   color: rgb(255, 255, 255);
@@ -309,6 +313,9 @@ body nav .navContent .containerLink .navLink {
   border: 0;
   border-bottom: 2px solid rgb(255, 255, 255);
 }
+.registerBody .registerSection .registerBlock .registerInfo input::-moz-placeholder {
+  color: rgb(255, 255, 255);
+}
 .registerBody .registerSection .registerBlock .registerInfo input::placeholder {
   color: rgb(255, 255, 255);
 }
@@ -377,9 +384,13 @@ body .dashBoardSection #userInfo aside #username {
   padding: 1rem;
 }
 body .dashBoardSection #userInfo button {
-  font-size: 3rem;
   border-radius: 1rem;
-  padding: 0.5rem;
+  background-color: white;
+}
+body .dashBoardSection #userInfo button a {
+  font-size: 3rem;
+  text-decoration: none;
+  padding: 1rem;
   color: black;
 }
 body .dashBoardSection #leaderboard {
@@ -418,7 +429,7 @@ body .dashboardTitle {
   animation: titleDrop 1s none;
 }
 
-body {
+.body {
   width: 100%;
   height: 100%;
   background-image: linear-gradient(rgba(0, 0, 1, 0.5), rgba(0, 0, 1, 0.5)), url("../../images/loginBG.png");
@@ -428,14 +439,14 @@ body {
   margin: 0;
   padding: 0;
 }
-body .welcomeSection {
+.body .welcomeSection {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   height: 50%;
 }
-body .welcomeSection .welcomeTitle {
+.body .welcomeSection .welcomeTitle {
   font-size: 5rem;
   text-align: center;
   margin: 20px;
@@ -444,17 +455,20 @@ body .welcomeSection .welcomeTitle {
   animation: titleDrop 1s 0.5s none;
   animation-fill-mode: forwards;
 }
-body .welcomeSection .welcomeInfo {
+.body .welcomeSection .welcomeInfo {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   width: 50%;
 }
-body .welcomeSection .welcomeInfo button {
-  color: black;
+.body .welcomeSection .welcomeInfo button {
   font-size: 3.5rem;
   padding: 0.5rem;
   border-radius: 1rem;
+}
+.body .welcomeSection .welcomeInfo button a {
+  text-decoration: none;
+  color: black;
 }
 
 * {
