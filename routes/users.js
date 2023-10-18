@@ -10,6 +10,9 @@ router.get('/login', (req, res)=>{
 router.get('/register', (req, res)=>{
     res.render('pages/register')
 })
+// router.post('/dashboard/game', (req,res,next)=>{
+//     res.render('pages/game')
+// })
 
 router.post('/register', async(req, res)=>{
     // gets the information from the page
