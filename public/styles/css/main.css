@@ -339,12 +339,24 @@ body nav .navContent .containerLink .navLink {
   }
 }
 body .dashBoardSection {
-  height: 100%;
+  height: 90%;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  justify-items: flex-start;
 }
 body .dashBoardSection #userInfo {
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  width: 40%;
+  height: 75%;
+  padding: 1rem;
+}
+body .dashBoardSection #userInfo aside {
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
@@ -352,17 +364,23 @@ body .dashBoardSection #userInfo {
   justify-content: space-around;
   background-color: #636363;
   color: white;
-  width: 40%;
-  height: 50%;
+  width: 100%;
+  height: 70%;
   padding: 1rem;
 }
-body .dashBoardSection #userInfo .userInfo {
+body .dashBoardSection #userInfo aside .userInfo {
   font-size: 3rem;
   padding: 1rem;
 }
-body .dashBoardSection #userInfo #username {
+body .dashBoardSection #userInfo aside #username {
   font-size: 4rem;
   padding: 1rem;
+}
+body .dashBoardSection #userInfo button {
+  font-size: 3rem;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  color: black;
 }
 body .dashBoardSection #leaderboard {
   border-radius: 1rem;
@@ -372,16 +390,24 @@ body .dashBoardSection #leaderboard {
   color: white;
   width: 40%;
   height: 75%;
-  padding: 1rem;
 }
 body .dashBoardSection #leaderboard #leaderboardTitle {
+  text-align: center;
   font-size: 4rem;
   padding: 1rem;
 }
 body .dashBoardSection #leaderboard .top {
-  display: flex;
-  flex-direction: column;
+  padding: 3rem;
+  width: 50%;
+  display: block;
   font-size: 3rem;
+}
+body .dashBoardSection #leaderboard .top li {
+  display: list-item;
+  list-style-position: inside;
+}
+body .dashBoardSection #leaderboard .top ul {
+  margin-left: 1rem;
 }
 body .dashboardTitle {
   font-size: 5rem;
@@ -390,6 +416,45 @@ body .dashboardTitle {
   color: white;
   transform: translate(0px, 0vh);
   animation: titleDrop 1s none;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(rgba(0, 0, 1, 0.5), rgba(0, 0, 1, 0.5)), url("../../images/loginBG.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 100;
+  margin: 0;
+  padding: 0;
+}
+body .welcomeSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 50%;
+}
+body .welcomeSection .welcomeTitle {
+  font-size: 5rem;
+  text-align: center;
+  margin: 20px;
+  color: white;
+  transform: translate(0px, -20vh);
+  animation: titleDrop 1s 0.5s none;
+  animation-fill-mode: forwards;
+}
+body .welcomeSection .welcomeInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 50%;
+}
+body .welcomeSection .welcomeInfo button {
+  color: black;
+  font-size: 3.5rem;
+  padding: 0.5rem;
+  border-radius: 1rem;
 }
 
 * {
