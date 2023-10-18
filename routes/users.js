@@ -4,17 +4,59 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const User = require('../models/user');
 
+// sends user to login
 router.get('/login', (req, res)=>{
     res.render('pages/login')
 })
+// sends user to register
 router.get('/register', (req, res)=>{
     res.render('pages/register')
 })
+// sends user to game
 router.get('/game', (req,res)=>{
     res.render('pages/game')
 })
+// sends person to dashboard
 router.get('/dashboard', (req,res)=>{
-    res.render('pages/dashboard')
+    res.render('pages/dashboard');
+})
+
+// function to get users
+router.get('/getUser', async(req,res)=>{
+    try {
+        let users = await User.find({});
+        res.json(users);
+    } catch (error) {
+        console.log(error)
+    }
+});
+
+// updates person score
+// put request
+router.put('/:email', async(req,res)=>{
+    try {
+        let {email} = req.params;
+        let {status} = req.body;
+        let changePlayer = await User.findOne({email:email});
+        let players;
+
+        let gameUpdt  = changePlayer.games
+        let winUpdt = changePlayer.wins 
+        let losesUpdt = changePlayer.loses 
+        let tiesUpdt = changePlayer.ties 
+
+        if(status == 'won'){
+            players = await User.findOneAndUpdate({email:email}, {games: gameUpdt+1, wins: winUpdt+1, won:false});
+        }else if(status == 'loss'){
+            players = await User.findOneAndUpdate({email:email}, {games: gameUpdt+1, loses: losesUpdt+1});
+        }else{
+            players = await User.findOneAndUpdate({email:email}, {games: gameUpdt+1, ties: tiesUpdt+1});
+        }
+        console.log(players);
+        res.json(players);
+    } catch (error) {
+        console.log(error);
+    }
 })
 
 router.post('/register', async(req, res)=>{

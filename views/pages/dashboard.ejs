@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,11 +43,11 @@
         <!-- the user info section -->
         <article id="userInfo">
             <aside>
-                <h1 id="username">Noah Santos</h1>
-                <p id="userGame" class="userInfo">Games: 0</p>
-                <p id="userWins" class="userInfo">Wins: 0</p>
-                <p id="userLoses" class="userInfo">Loses: 0</p>
-                <p id="userRatio" class="userInfo">Ratio: 0</p>
+                <h1 id="username"></h1>
+                <p id="userGame" class="userInfo"></p>
+                <p id="userWins" class="userInfo"></p>
+                <p id="userLoses" class="userInfo"></p>
+                <p id="userTies" class="userInfo"></p>
             </aside>
 
             <!-- button to play a game -->
@@ -60,18 +58,19 @@
         <!-- leaderboard section -->
         <article id="leaderboard">
             <h1 id="leaderboardTitle">Leaderboard</h1>
-            <ol class="top">
+            <ol class="top" id="scoreBoard">
                 <li>User</li>
                 <ul>
                     <li>Wins</li>
+                    <li>Games</li>
                 </ul>
                 <li>Item</li>
             </ol>
         </article>
     </section>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.js"
-        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="../public/js/dashboard.js"></script>
 </body>
 

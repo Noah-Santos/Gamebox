@@ -5,7 +5,7 @@ const router = express.Router();
 
 let Players = require('../models/player');
 
-router.get('/', async(req,res)=>{
+router.get('/getUser', async(req,res)=>{
     try {
         let players = await Players.find({});
         res.json(players);
@@ -29,23 +29,19 @@ router.post('/', async(req,res)=>{
 });
 
 // put request
-router.put('/:playerID', async(req,res)=>{
+router.put('/:email', async(req,res)=>{
     try {
-        let {playerID} = req.params;
-        let {name, age, board} = req.body;
-        let changePlayer = Players.findById(playerID);
+        let {email} = req.params;
+        let {won} = req.body;
+        let changePlayer = User.findOne({email:email});
+        let players;
 
-        if(!name){
-            name = changePlayer.name;
+        if(won){
+            players = await User.findOneAndUpdate({email:email}, {games: changePlayer.game+1, wins: changePlayer.wins+1, won:false});
+        }else{
+            players = await User.findOneAndUpdate({email:email}, {games: changePlayer.game+1, loses: changePlayer.loses+1});
         }
-        if(!age){
-            age = changePlayer.age;
-        }
-        if(!board){
-            board = changePlayer.board;
-        }
-
-        let players = await Players.findOneAndUpdate({playerID:playerID}, {name:name, age:age, board:board});
+        res.json(players);
     } catch (error) {
         console.log(error);
     }
