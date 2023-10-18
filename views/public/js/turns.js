@@ -470,7 +470,29 @@ $(function(){
         return playerScore;
     }
     
-})
+});
+
+const fetchPeople = async() =>{
+    try {
+        const {data} = await axios.get('/users');
+        console.log(data);
+
+        // going through the data array and getting the data that holds the value of data
+        // const task = data.map((tasks)=>{
+        //     return `<option value="${tasks.name}">${tasks.name}</option>`;
+        // })
+
+        // results.innerHTML = task.join("");
+
+        // change();
+        // newTask.value = '';
+        // newDesc.value = '';
+        // newAssign.value = '';
+    }catch(e){
+        // formAlert.textContent = e.response.data.msg;
+    }
+}
+fetchPeople();
 
 // function to get a new deck
 async function getDeck(){

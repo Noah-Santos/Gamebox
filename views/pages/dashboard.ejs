@@ -1,8 +1,4 @@
-<!-- <h1>Dashboard</h1>
 
-<p>Welcome <%= user.first_name %></p>
-
-<a href="/users/logout">Logout</a> -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./public/styles/css/main.css">
+    <link rel="stylesheet" href="../public/styles/css/main.css">
     <title>9 Hole</title>
 </head>
 
@@ -37,7 +33,7 @@
                 <a href="index.html" class="navLink w-auto">Login</a>
             </div> -->
             <div class="containerLink">
-                <a href="dashboard.html" class="navLink w-auto">Dashboard</a>
+                <a href="/users/dashboard" class="navLink w-auto">Dashboard</a>
             </div>
             <div class="containerLink">
                 <a href="/users/logout" class="navLink w-auto">Logout</a>
@@ -56,10 +52,8 @@
                 <p id="userRatio" class="userInfo">Ratio: 0</p>
             </aside>
 
-            <form action="/users/dashboard" method="POST" class="loginBlock">
-                <!-- button to play game -->
-                <button type="submit">Play Game</button>
-            </form>
+            <!-- button to play a game -->
+            <button><a href="/users/game">Play Game</a></button>
         </article>
 
 
@@ -78,7 +72,7 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <!-- <script src="./js/dashboard.js"></script> -->
+    <script src="../public/js/dashboard.js"></script>
 </body>
 
 </html>

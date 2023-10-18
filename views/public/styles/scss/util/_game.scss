@@ -1,5 +1,5 @@
 // sets the background image
-body {
+#gameBody {
     width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
@@ -14,7 +14,7 @@ body {
         width: 100vw;
 
         h1{
-            color: #636363;
+            color: white;
             font-size: 4rem;
         }
     }

@@ -49,10 +49,16 @@ body{
 
             // button to start a game
             button{
-                font-size: 3rem;
                 border-radius: 1rem;
-                padding: .5rem;
-                color: black;
+                background-color: white;
+
+                // edits text inside button
+                a {
+                    font-size: 3rem;
+                    text-decoration: none;
+                    padding: 1rem;
+                    color: black;
+                }
             }
         }
 
