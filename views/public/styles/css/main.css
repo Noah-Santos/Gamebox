@@ -152,6 +152,7 @@ body nav .navContent .x {
   display: none;
 }
 body nav .navContent .containerLink {
+  width: -moz-fit-content;
   width: fit-content;
 }
 body nav .navContent .containerLink .navLink {
@@ -224,6 +225,9 @@ body nav .navContent .containerLink .navLink {
   border: 0;
   border-bottom: 2px solid rgb(255, 255, 255);
 }
+.loginBody .loginSection .loginBlock .loginInfo input::-moz-placeholder {
+  color: rgb(255, 255, 255);
+}
 .loginBody .loginSection .loginBlock .loginInfo input::placeholder {
   color: rgb(255, 255, 255);
 }
@@ -261,7 +265,7 @@ body nav .navContent .containerLink .navLink {
   padding: 0;
 }
 .registerBody .registerSection {
-  height: 85%;
+  height: 75%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -282,17 +286,27 @@ body nav .navContent .containerLink .navLink {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  width: 20%;
+  width: 100%;
 }
 .registerBody .registerSection .registerBlock .registerInfo {
   animation: registerSlide 3s 0.5s none linear;
   opacity: 0;
   animation-fill-mode: forwards;
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
 }
+.registerBody .registerSection .registerBlock .registerInfo .infoParts {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.registerBody .registerSection .registerBlock .registerInfo .infoParts div {
+  text-align: center;
+}
 .registerBody .registerSection .registerBlock .registerInfo input {
-  width: 100%;
+  width: 70%;
   height: auto;
   font-size: 50px;
   background: none;
@@ -308,6 +322,9 @@ body nav .navContent .containerLink .navLink {
   outline: 0;
   border: 0;
   border-bottom: 2px solid rgb(255, 255, 255);
+}
+.registerBody .registerSection .registerBlock .registerInfo input::-moz-placeholder {
+  color: rgb(255, 255, 255);
 }
 .registerBody .registerSection .registerBlock .registerInfo input::placeholder {
   color: rgb(255, 255, 255);

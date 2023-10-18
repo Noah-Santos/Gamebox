@@ -11,7 +11,7 @@
 
     // edits the section holding register stuff
     .registerSection {
-        height: 85%;
+        height: 75%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -35,7 +35,7 @@
             flex-direction: column;
             justify-content: space-around;
             align-items: center;
-            width: 20%;
+            width: 100%;
 
             // edits the register info section
             .registerInfo {
@@ -43,11 +43,24 @@
                 opacity: 0;
                 animation-fill-mode: forwards;
                 display: flex;
+                align-items: center;
+                justify-content: center;
                 flex-direction: column;
+
+                // Sections of info from the info block of the register page
+                .infoParts{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    
+                    div{
+                        text-align: center;
+                    }
+                }
 
                 // edits the individual input sections
                 input {
-                    width: 100%;
+                    width: 70%;
                     height: auto;
                     font-size: 50px;
                     background: none;
