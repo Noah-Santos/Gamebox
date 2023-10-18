@@ -6,50 +6,41 @@
     <link rel="stylesheet" href="./styles/css/main.css">
     <title>9 Hole</title>
 </head>
-<body>
+<body class="registerBody">
     <!-- holds the register section -->
-    <section class="registerSection">
+    <main class="registerSection">
         <!-- register title -->
         <h1 class="registerTitle">9 Hole</h1>
-    
-        <!-- register Block -->
-        <section class="registerBlock">
-            <div class="registerInfo">
-                <input type="text" placeholder="First Name" id="first_name">
-                <input type="text" placeholder="Last Name" id="last_name">
-                <input type="text" placeholder="Email" id="email">
-                <input type="text" placeholder="Password" id="password">
-                <input type="text" placeholder="Confirm Password" id="password2">
-                <button type="submit">Register In</button>
-            </div>
-        </section>
-    </section>
-    
-    <section class="cardHolder">
-        <!-- Left set of cards -->
-        <div class="cardSets">
-            <img src="https://www.deckofcardsapi.com/static/img/back.png">
-            <img src="https://www.deckofcardsapi.com/static/img/back.png">
-            <img src="https://www.deckofcardsapi.com/static/img/back.png">
-            <img src="https://www.deckofcardsapi.com/static/img/back.png">
-            <img src="https://www.deckofcardsapi.com/static/img/back.png">
-            <img src="https://www.deckofcardsapi.com/static/img/back.png">
-            <img src="https://www.deckofcardsapi.com/static/img/back.png">
-            <img src="https://www.deckofcardsapi.com/static/img/back.png">
-        </div>
-        <!-- Right set of cards -->
-        <div class="cardSets">
-            <img src="https://www.deckofcardsapi.com/static/img/back.png">
-            <img src="https://www.deckofcardsapi.com/static/img/back.png">
-            <img src="https://www.deckofcardsapi.com/static/img/back.png">
-            <img src="https://www.deckofcardsapi.com/static/img/back.png">
-            <img src="https://www.deckofcardsapi.com/static/img/back.png">
-            <img src="https://www.deckofcardsapi.com/static/img/back.png">
-            <img src="https://www.deckofcardsapi.com/static/img/back.png">
-            <img src="https://www.deckofcardsapi.com/static/img/back.png">
-        </div>
-    </section>
-    
+
+        <form action="/users/register" method="POST" class="registerBlock">
+            <article class="registerInfo">
+                <div>
+                    <input type="name" name="first_name" id="first_name" placeholder="Enter First Name"
+                        value="<%= typeof first_name != 'undefined' ? first_name : '' %>">
+                </div>
+                <input type="name" name="last_name" id="last_name" placeholder="Enter Last Name"
+                    value="<%= typeof last_name != 'undefined' ? last_name : '' %>">
+                </div>
+                <div>
+                    <input type="email" name="email" id="email" placeholder="Enter Email"
+                        value="<%= typeof email != 'undefined' ? email : '' %>">
+                </div>
+                <div>
+                    <input type="password" name="password" id="password" placeholder="Enter Password"
+                        value="<%= typeof password != 'undefined' ? password : '' %>">
+                </div>
+                <div>
+                    <input type="password" name="password2" id="password2" placeholder="Confirm Password"
+                        value="<%= typeof password2 != 'undefined' ? password2 : '' %>">
+                </div>
+            </article>
+            
+            <button type="submit">Create Account</button>
+            <br>
+            <p class="account">Have An Account? <a href="/users/login">Login</a></p>
+        </form>
+
+    </main>
     <!-- <script src="./taskFile.js"></script> -->
 </body>
 </html>

@@ -14,15 +14,23 @@ body{
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: space-around;
             background-color: #636363;
             color: white;
             width: 40%;
             height: 50%;
             padding: 1rem;
 
+            // edits the user's information
+            .userInfo{
+                font-size: 3rem;
+                padding: 1rem;
+            }
+
             // edits the current user's name
             #username{
                 font-size: 4rem;
+                padding: 1rem;
             }
 
             // edits the user's games played
@@ -56,6 +64,19 @@ body{
             width: 40%;
             height: 75%;
             padding: 1rem;
+
+            // title for leaderboard section
+            #leaderboardTitle{
+                font-size: 4rem;
+                padding: 1rem;
+            }
+
+            // edits the list of people
+            .top{
+                display: flex;
+                flex-direction: column;
+                font-size: 3rem;
+            }
         }
     }
 

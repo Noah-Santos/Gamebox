@@ -152,7 +152,6 @@ body nav .navContent .x {
   display: none;
 }
 body nav .navContent .containerLink {
-  width: -moz-fit-content;
   width: fit-content;
 }
 body nav .navContent .containerLink .navLink {
@@ -169,111 +168,158 @@ body nav .navContent .containerLink .navLink {
 .loginBody {
   width: 100vw;
   height: 100vh;
-  background-image: url("../../images/loginBG.png");
+  background-image: linear-gradient(rgba(0, 0, 1, 0.5), rgba(0, 0, 1, 0.5)), url("../../images/loginBG.png");
   background-size: cover;
   background-repeat: no-repeat;
-  filter: brightness(50%);
   z-index: 100;
   margin: 0;
   padding: 0;
 }
-
-.main {
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  align-items: center;
-  justify-content: center;
-  z-index: 200;
-  position: absolute;
-}
-
-.second {
-  width: 50vw;
-  height: 35vh;
-  z-index: 200;
-  background-color: lightgrey;
-  margin-left: 3vw;
-}
-
-.registerSection {
-  height: 75%;
-  width: 100%;
+.loginBody .loginSection {
+  height: 55%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
 }
-.registerSection .registerTitle {
+.loginBody .loginSection .loginTitle {
   font-size: 5rem;
   text-align: center;
   margin: 20px;
   color: white;
   transform: translate(0px, -20vh);
-  animation: titleDrop 2s 0.5s none;
+  animation: titleDrop 1s 0.5s none;
   animation-fill-mode: forwards;
 }
-.registerSection .registerBlock {
+.loginBody .loginSection .loginBlock {
+  color: white;
   display: flex;
-  justify-content: center;
-  align-content: space-evenly;
-  width: 100%;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 20%;
 }
-.registerSection .registerBlock .registerInfo {
-  animation: registerSlide 3s 0.5s none linear;
-  animation-fill-mode: forwards;
-  display: flex;
+.loginBody .loginSection .loginBlock .loginInfo {
+  animation: loginSlide 3s 0.5s none linear;
   opacity: 0;
+  animation-fill-mode: forwards;
+  display: flex;
   flex-direction: column;
 }
-.registerSection .registerBlock input {
-  width: 25vw;
+.loginBody .loginSection .loginBlock .loginInfo input {
+  width: 100%;
   height: auto;
   font-size: 50px;
   background: none;
   border: none;
-  border-bottom: 2px solid black;
-  color: white;
   text-align: center;
+  border-bottom: 2px solid rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
   transform: translate(0, 0);
   opacity: 1;
   margin: 1rem;
 }
-.registerSection .registerBlock input:focus {
+.loginBody .loginSection .loginBlock .loginInfo input:focus {
   outline: 0;
   border: 0;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid rgb(255, 255, 255);
 }
-.registerSection .registerBlock input::-moz-placeholder {
-  color: white;
+.loginBody .loginSection .loginBlock .loginInfo input::placeholder {
+  color: rgb(255, 255, 255);
 }
-.registerSection .registerBlock input::placeholder {
-  color: white;
-}
-.registerSection .registerBlock button {
-  width: 25vw;
-  height: auto;
-  font-size: 50px;
-  background-color: blueviolet;
-  color: white;
-  border-radius: 12px;
-  margin: 1rem;
+.loginBody .loginSection .loginBlock button {
+  color: black;
+  font-size: 2rem;
+  padding: 0.5rem;
+  border-radius: 1rem;
 }
 
-.cardHolder {
-  display: flex;
-  justify-content: space-between;
+@keyframes titleDrop {
+  from {
+    transform: translate(0px, -15vh);
+  }
+  to {
+    transform: translate(0px, 0vh);
+  }
+}
+@keyframes loginSlide {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.registerBody {
   width: 100vw;
-  height: auto;
-  transform: translate(0px, -300vh);
-  animation: cards 3s 0.5s ease-in-out;
+  height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 1, 0.5), rgba(0, 0, 1, 0.5)), url("../../images/loginBG.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 100;
+  margin: 0;
+  padding: 0;
+}
+.registerBody .registerSection {
+  height: 85%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.registerBody .registerSection .registerTitle {
+  font-size: 5rem;
+  text-align: center;
+  margin: 20px;
+  color: white;
+  transform: translate(0px, -20vh);
+  animation: titleDrop 1s 0.5s none;
   animation-fill-mode: forwards;
 }
-.cardHolder .cardSets {
+.registerBody .registerSection .registerBlock {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 20%;
+}
+.registerBody .registerSection .registerBlock .registerInfo {
+  animation: registerSlide 3s 0.5s none linear;
+  opacity: 0;
+  animation-fill-mode: forwards;
   display: flex;
   flex-direction: column;
 }
-.cardHolder .cardSets img {
-  width: 7vw;
+.registerBody .registerSection .registerBlock .registerInfo input {
+  width: 100%;
+  height: auto;
+  font-size: 50px;
+  background: none;
+  border: none;
+  text-align: center;
+  border-bottom: 2px solid rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+  transform: translate(0, 0);
+  opacity: 1;
+  margin: 1rem;
+}
+.registerBody .registerSection .registerBlock .registerInfo input:focus {
+  outline: 0;
+  border: 0;
+  border-bottom: 2px solid rgb(255, 255, 255);
+}
+.registerBody .registerSection .registerBlock .registerInfo input::placeholder {
+  color: rgb(255, 255, 255);
+}
+.registerBody .registerSection .registerBlock button {
+  color: black;
+  font-size: 2rem;
+  padding: 0.5rem;
+  border-radius: 1rem;
+}
+.registerBody .registerSection .registerBlock .account {
+  font-size: 2rem;
 }
 
 @keyframes titleDrop {
@@ -292,14 +338,6 @@ body nav .navContent .containerLink .navLink {
     opacity: 1;
   }
 }
-@keyframes cards {
-  from {
-    transform: translate(0px, -300vh);
-  }
-  to {
-    transform: translate(0px, -90vh);
-  }
-}
 body .dashBoardSection {
   height: 100%;
   display: flex;
@@ -311,14 +349,20 @@ body .dashBoardSection #userInfo {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-around;
   background-color: #636363;
   color: white;
   width: 40%;
   height: 50%;
   padding: 1rem;
 }
+body .dashBoardSection #userInfo .userInfo {
+  font-size: 3rem;
+  padding: 1rem;
+}
 body .dashBoardSection #userInfo #username {
   font-size: 4rem;
+  padding: 1rem;
 }
 body .dashBoardSection #leaderboard {
   border-radius: 1rem;
@@ -329,6 +373,15 @@ body .dashBoardSection #leaderboard {
   width: 40%;
   height: 75%;
   padding: 1rem;
+}
+body .dashBoardSection #leaderboard #leaderboardTitle {
+  font-size: 4rem;
+  padding: 1rem;
+}
+body .dashBoardSection #leaderboard .top {
+  display: flex;
+  flex-direction: column;
+  font-size: 3rem;
 }
 body .dashboardTitle {
   font-size: 5rem;

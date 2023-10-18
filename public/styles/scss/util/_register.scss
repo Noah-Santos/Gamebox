@@ -1,99 +1,90 @@
-// section to hold register information
-.registerSection {
-    height: 75%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    // edits the title of the page
-    .registerTitle {
-        font-size: 5rem;
-        // font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        text-align: center;
-        margin: 20px;
-        color: white;
-        transform: translate(0px, -20vh);
-        animation: titleDrop 2s 0.5s none;
-        animation-fill-mode: forwards;
-    }
-
-    // section for the information
-    .registerBlock {
-        display: flex;
-        justify-content: center;
-        // align-items: center;
-        align-content: space-evenly;
-        // height: 70vh;
-        width: 100%;
-
-        .registerInfo {
-            animation: registerSlide 3s 0.5s none linear;
-            animation-fill-mode: forwards;
-            display: flex;
-            opacity: 0;
-            flex-direction: column;
-        }
-
-        // edits the individual input sections
-        input {
-            width: 25vw;
-            height: auto;
-            font-size: 50px;
-            background: none;
-            border: none;
-            border-bottom: 2px solid black;
-            color: white;
-            text-align: center;
-            transform: translate(0, 0);
-            opacity: 1;
-            margin: 1rem;
-
-            &:focus {
-                outline: 0;
-                border: 0;
-                border-bottom: 2px solid black;
-            }
-
-            &::placeholder {
-                color: white;
-            }
-
-
-        }
-
-        // edits the input button
-        button {
-            width: 25vw;
-            height: auto;
-            font-size: 50px;
-            background-color: blueviolet;
-            color: white;
-            border-radius: 12px;
-            margin: 1rem;
-        }
-    }
-}
-
-// section for holding cards
-.cardHolder {
-    display: flex;
-    justify-content: space-between;
+// edits section of the page
+.registerBody {
     width: 100vw;
-    height: auto;
-    transform: translate(0px, -300vh);
-    animation: cards 3s 0.5s ease-in-out;
-    animation-fill-mode: forwards;
+    height: 100vh;
+    background-image: linear-gradient(rgb(0, 0, 1, 0.5), rgba(0, 0, 1, 0.5)), url('../../images/loginBG.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 100;
+    margin: 0;
+    padding: 0;
 
-    // one set of cards
-    .cardSets {
+    // edits the section holding register stuff
+    .registerSection {
+        height: 85%;
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
 
-        img {
-            width: 7vw;
+        // edits the title of the page
+        .registerTitle {
+            font-size: 5rem;
+            text-align: center;
+            margin: 20px;
+            color: white;
+            transform: translate(0px, -20vh);
+            animation: titleDrop 1s 0.5s none;
+            animation-fill-mode: forwards;
+        }
+
+        // section for the information
+        .registerBlock {
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            width: 20%;
+
+            // edits the register info section
+            .registerInfo {
+                animation: registerSlide 3s 0.5s none linear;
+                opacity: 0;
+                animation-fill-mode: forwards;
+                display: flex;
+                flex-direction: column;
+
+                // edits the individual input sections
+                input {
+                    width: 100%;
+                    height: auto;
+                    font-size: 50px;
+                    background: none;
+                    border: none;
+                    text-align: center;
+                    border-bottom: 2px solid rgb(255, 255, 255);
+                    color: rgb(255, 255, 255);
+                    transform: translate(0, 0);
+                    opacity: 1;
+                    margin: 1rem;
+
+                    &:focus {
+                        outline: 0;
+                        border: 0;
+                        border-bottom: 2px solid rgb(255, 255, 255);
+                    }
+
+                    &::placeholder {
+                        color: rgb(255, 255, 255);
+                    }
+                }
+            }
+
+            button {
+                color: black;
+                font-size: 2rem;
+                padding: .5rem;
+                border-radius: 1rem;
+            }
+
+            // edits the account section at the bottom
+            .account{
+                font-size: 2rem;
+            }
         }
     }
+
 }
 
 // gets the title to slide downwards
@@ -118,13 +109,8 @@
     }
 }
 
-// does the sliding of the cards
-@keyframes cards {
-    from {
-        transform: translate(0px, -300vh);
-    }
-
-    to {
-        transform: translate(0px, -90vh)
-    }
-}
+// // // does the sliding of the cards
+// // @keyframes cards {
+// //     from{transform: translate(0px, -300vh);}
+// //     to{transform: translate(0px, -90vh)}
+// // }
