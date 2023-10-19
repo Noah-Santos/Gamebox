@@ -152,7 +152,6 @@ body nav .navContent .x {
   display: none;
 }
 body nav .navContent .containerLink {
-  width: -moz-fit-content;
   width: fit-content;
 }
 body nav .navContent .containerLink .navLink {
@@ -224,9 +223,6 @@ body nav .navContent .containerLink .navLink {
   outline: 0;
   border: 0;
   border-bottom: 2px solid rgb(255, 255, 255);
-}
-.loginBody .loginSection .loginBlock .loginInfo input::-moz-placeholder {
-  color: rgb(255, 255, 255);
 }
 .loginBody .loginSection .loginBlock .loginInfo input::placeholder {
   color: rgb(255, 255, 255);
@@ -323,9 +319,6 @@ body nav .navContent .containerLink .navLink {
   border: 0;
   border-bottom: 2px solid rgb(255, 255, 255);
 }
-.registerBody .registerSection .registerBlock .registerInfo input::-moz-placeholder {
-  color: rgb(255, 255, 255);
-}
 .registerBody .registerSection .registerBlock .registerInfo input::placeholder {
   color: rgb(255, 255, 255);
 }
@@ -418,10 +411,10 @@ body .dashBoardSection #leaderboard #leaderboardTitle {
   padding: 1rem;
 }
 body .dashBoardSection #leaderboard .top {
-  padding: 3rem;
+  padding-left: 3rem;
   width: 50%;
   display: block;
-  font-size: 3rem;
+  font-size: 2rem;
 }
 body .dashBoardSection #leaderboard .top li {
   display: list-item;

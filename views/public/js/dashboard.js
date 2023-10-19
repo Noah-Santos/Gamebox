@@ -33,21 +33,29 @@ const fetchPeople = async() =>{
     try {
         const {data} = await axios.get('/users/getUser');
         let currentUser;
+        let leaderBoardText = '';
         console.log(data);
 
         // going through the data array and getting the data that holds the value of data
-        const leaderBoard = data.map((user)=>{
-            let temp = [`${user.first_name} ${user.last_name}`, `${user.wins}`];
+        let leaderBoard = data.map((user)=>{
+            let temp = [`${user.first_name} ${user.last_name}`, `${user.wins}`, `${user.games}`];
             // gets the data of the current email
             if(user.email == currentEmail){
                 currentUser = user;
             }
             return temp;
         })
-        // sorts the numbers in numerical order
-        leaderBoard.sort(compareNumbers);
-        console.log(leaderBoard)
 
+        // sorts the wins in numerical order
+        let lowest = 999;
+        let highest = -999;
+        
+        leaderBoard = leaderBoard.map(spot=>{
+            spot[1] = Number(spot[1]);
+            return spot
+        })
+        leaderBoard = leaderBoard.sort((spot1, spot2) => spot2[1]-spot1[1])
+        console.log(leaderBoard)
         // sets the user info
         document.querySelector('#username').innerHTML = `${currentUser.first_name} ${currentUser.last_name}`;
         document.querySelector('#userGame').innerHTML = `Games: ${currentUser.games}`;
@@ -55,20 +63,21 @@ const fetchPeople = async() =>{
         document.querySelector('#userLoses').innerHTML = `Loses: ${currentUser.loses}`;
         document.querySelector('#userTies').innerHTML = `Ties: ${currentUser.ties}`;
 
-        // results.innerHTML = task.join("");
+        // gets the top 3 users to put on the leaderboard
+        for(let i = 0; i < 3; i++){
+            leaderBoardText += `
+                <li>${leaderBoard[i][0]}</li>
+                <ul>
+                    <li>Wins: ${leaderBoard[i][1]}</li>
+                    <li>Games: ${leaderBoard[i][2]}</li>
+                </ul>
+            `;
+        }
 
-        // change();
-        // newTask.value = '';
-        // newDesc.value = '';
-        // newAssign.value = '';
+        document.getElementById('scoreBoard').innerHTML = leaderBoardText;
+
     }catch(e){
         // formAlert.textContent = e.response.data.msg;
         console.log(e);
     }
 }
-
-// used to sort the numbers
-function compareNumbers(a, b) {
-  return a - b;
-}
-
