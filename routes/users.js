@@ -40,17 +40,18 @@ router.put('/:email', async(req,res)=>{
         let changePlayer = await User.findOne({email:email});
         let players;
 
-        let gameUpdt  = changePlayer.games
-        let winUpdt = changePlayer.wins 
-        let losesUpdt = changePlayer.loses 
-        let tiesUpdt = changePlayer.ties 
+        let gameUpdt  = changePlayer.games;
+        let winUpdt = changePlayer.wins;
+        let losesUpdt = changePlayer.loses;
+        let tiesUpdt = changePlayer.ties;
+        console.log(status)
 
         if(status == 'won'){
-            players = await User.findOneAndUpdate({email:email}, {games: gameUpdt+1, wins: winUpdt+1, won:false});
-        }else if(status == 'loss'){
-            players = await User.findOneAndUpdate({email:email}, {games: gameUpdt+1, loses: losesUpdt+1});
+            players = await User.findOneAndUpdate({email:email}, {games: gameUpdt+1, wins: winUpdt+1, won:false, status:"none"});
+        }else if(status == 'ties'){
+            players = await User.findOneAndUpdate({email:email}, {games: gameUpdt+1, ties: tiesUpdt+1, status:"none"});
         }else{
-            players = await User.findOneAndUpdate({email:email}, {games: gameUpdt+1, ties: tiesUpdt+1});
+            players = await User.findOneAndUpdate({email:email}, {games: gameUpdt+1, loses: losesUpdt+1, status:"none"});
         }
         console.log(players);
         res.json(players);
