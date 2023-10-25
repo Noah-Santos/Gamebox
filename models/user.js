@@ -32,9 +32,13 @@ const UserSchema  = new mongoose.Schema({
         type : Number,
         default : 0
     },
-    ratio :{
+    ties :{
+        type : Number,
+        default : 0
+    },
+    status:{
         type : String,
-        default : '0'
+        default : 'none'
     }
 },{collection : 'Users'});
 const User= mongoose.model('User',UserSchema);

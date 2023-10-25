@@ -1,4 +1,5 @@
-$(function(){
+$(async function(){
+    await getDeck();
     let deckId = sessionStorage.getItem('deck');
     let started = false;
     let picked = false;
@@ -413,13 +414,33 @@ $(function(){
                 playerTwoScore += colSum(playerTwo);
             }
 
-        // determines who has the lower score
+        // determines who has the lower score and updates mongodb
+        let currentEmail = sessionStorage.getItem('currentUserEmail');
         if(playerOneScore < playerTwoScore){
             document.getElementById(`winner`).innerHTML = 'Player wins';
+            console.log(currentEmail);
+
+            fetch(`/users/${currentEmail}`, {
+                method: "PUT",
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({status:'won'}),
+            })
         }else if(playerOneScore > playerTwoScore){
             document.getElementById(`winner`).innerHTML = 'Guest wins';
+
+            fetch(`/users/${currentEmail}`, {
+                method: "PUT",
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({status:'loss'}),
+            })
         }else{
             document.getElementById(`winner`).innerHTML = 'Tie';
+
+            fetch(`/users/${currentEmail}`, {
+                method: "PUT",
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({status:'tie'}),
+            })
         }
         console.log(`Player one score: ${playerOneScore}`)
         console.log(`Player two score: ${playerTwoScore}`)
@@ -471,28 +492,6 @@ $(function(){
     }
     
 });
-
-const fetchPeople = async() =>{
-    try {
-        const {data} = await axios.get('/users');
-        console.log(data);
-
-        // going through the data array and getting the data that holds the value of data
-        // const task = data.map((tasks)=>{
-        //     return `<option value="${tasks.name}">${tasks.name}</option>`;
-        // })
-
-        // results.innerHTML = task.join("");
-
-        // change();
-        // newTask.value = '';
-        // newDesc.value = '';
-        // newAssign.value = '';
-    }catch(e){
-        // formAlert.textContent = e.response.data.msg;
-    }
-}
-fetchPeople();
 
 // function to get a new deck
 async function getDeck(){
