@@ -69,7 +69,7 @@ router.post('/register', async(req, res)=>{
                 email: email,
                 password: password
             })
-
+            
             // used to encrypt the password
             // the 10 defines how many times the password will go through the process to be encrypted
             // 10 is a good number to use
